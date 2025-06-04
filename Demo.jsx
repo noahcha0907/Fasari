@@ -1296,7 +1296,7 @@ const VasariPlatform = () => {
                   <BarChart3 className="w-12 h-12 text-white" />
                 </div>
 
-            );
+        
 
   // Main render logic
   if (currentPage === 'landing') {
