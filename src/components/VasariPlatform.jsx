@@ -211,6 +211,99 @@ const VasariPlatform = () => {
     }
   };
 
+  // Shared Header Component
+  const Header = () => (
+    <header className="px-6 py-6 bg-white border-b border-gray-200 relative z-20">
+      <div className="max-w-7xl mx-auto flex justify-between items-center">
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 border-2 rounded-lg relative" style={{ borderColor: '#000000', background: 'transparent' }}>
+            {/* Inner diamond in black and white */}
+            <div 
+              className="absolute inset-0"
+              style={{
+                transform: 'rotate(45deg) scale(0.7)',
+                top: '50%',
+                left: '50%',
+                transformOrigin: 'center',
+                marginTop: '-50%',
+                marginLeft: '-50%',
+                width: '100%',
+                height: '100%',
+                background: '#000000',
+                border: '1px solid #000000'
+              }}
+            >
+              {/* Mini square inside diamond in white */}
+              <div 
+                className="absolute inset-0 border-2 border-white"
+                style={{
+                  transform: 'rotate(45deg) scale(0.85)',
+                  top: '50%',
+                  left: '50%',
+                  transformOrigin: 'center',
+                  marginTop: '-50%',
+                  marginLeft: '-50%',
+                  width: '100%',
+                  height: '100%'
+                }}
+              ></div>
+            </div>
+
+            {/* Plus symbol in white */}
+            <div className="absolute inset-0 z-10 flex items-center justify-center">
+              {/* Horizontal line of plus */}
+              <div 
+                className="absolute bg-white"
+                style={{
+                  width: '100%',
+                  height: '2px',
+                  top: '50%',
+                  left: '0',
+                  transform: 'translateY(-50%)'
+                }}
+              ></div>
+              {/* Vertical line of plus */}
+              <div 
+                className="absolute bg-white"
+                style={{
+                  width: '2px',
+                  height: '100%',
+                  top: '0',
+                  left: '50%',
+                  transform: 'translateX(-50%)'
+                }}
+              ></div>
+            </div>
+          </div>
+          <span 
+            className="text-xl font-semibold text-black cursor-pointer" 
+            style={{ fontFamily: 'JetBrains Mono, monospace' }}
+            onClick={() => setCurrentPage('landing')}
+          >
+            Vasari
+          </span>
+        </div>
+        <div className="flex items-center space-x-3">
+          <button
+            onClick={() => setCurrentPage('vasari-v01')}
+            className="px-4 py-2 bg-white text-black text-sm font-bold rounded-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-lg border border-black flex items-center space-x-2"
+            style={{ fontFamily: 'JetBrains Mono, monospace' }}
+          >
+            <span>TRY VASARI-V.01</span>
+          </button>
+          <button
+            onClick={() => setCurrentPage('evaluation')}
+            className="px-4 py-2 bg-black text-white text-sm font-bold rounded-lg hover:bg-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg border border-black flex items-center space-x-2"
+            style={{ fontFamily: 'JetBrains Mono, monospace' }}
+          >
+            <Eye className="w-4 h-4" />
+            <span>EVALUATE ARTWORK</span>
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+
   // Intersection Observer Hook
   const useIntersectionObserver = (threshold = 0.3) => {
     const [isVisible, setIsVisible] = useState(false);
@@ -250,89 +343,13 @@ const VasariPlatform = () => {
     
     return (
       <div className="min-h-screen bg-white text-gray-900" style={{ fontFamily: 'Inter, system-ui, -apple-system, sans-serif' }}>
-        {/* Header */}
-        <header className="px-6 py-6 bg-white border-b border-gray-200 relative z-20">
-          <div className="max-w-7xl mx-auto flex justify-between items-center">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 border-2 rounded-lg relative" style={{ borderColor: '#dc2626', background: 'transparent' }}>
-                {/* Inner diamond in red and white */}
-                <div 
-                  className="absolute inset-0"
-                  style={{
-                    transform: 'rotate(45deg) scale(0.7)',
-                    top: '50%',
-                    left: '50%',
-                    transformOrigin: 'center',
-                    marginTop: '-50%',
-                    marginLeft: '-50%',
-                    width: '100%',
-                    height: '100%',
-                    background: '#dc2626',
-                    border: '1px solid #dc2626'
-                  }}
-                >
-                  {/* Mini square inside diamond in white */}
-                  <div 
-                    className="absolute inset-0 border-2 border-white"
-                    style={{
-                      transform: 'rotate(45deg) scale(0.85)',
-                      top: '50%',
-                      left: '50%',
-                      transformOrigin: 'center',
-                      marginTop: '-50%',
-                      marginLeft: '-50%',
-                      width: '100%',
-                      height: '100%'
-                    }}
-                  ></div>
-                </div>
-
-                {/* Plus symbol in white */}
-                <div className="absolute inset-0 z-10 flex items-center justify-center">
-                  {/* Horizontal line of plus */}
-                  <div 
-                    className="absolute bg-white"
-                    style={{
-                      width: '100%',
-                      height: '1px',
-                      top: '50%',
-                      left: '0',
-                      transform: 'translateY(-50%)'
-                    }}
-                  ></div>
-                  {/* Vertical line of plus */}
-                  <div 
-                    className="absolute bg-white"
-                    style={{
-                      width: '1px',
-                      height: '100%',
-                      top: '0',
-                      left: '50%',
-                      transform: 'translateX(-50%)'
-                    }}
-                  ></div>
-                </div>
-              </div>
-              <span className="text-lg font-semibold text-red-600" style={{ fontFamily: 'JetBrains Mono, monospace' }}>Vasari</span>
-            </div>
-            <div className="flex items-center">
-              <button
-                onClick={() => setCurrentPage('evaluation')}
-                className="px-4 py-2 bg-red-600 text-white text-sm font-bold rounded-lg hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-lg border border-red-300 flex items-center space-x-2"
-                style={{ fontFamily: 'JetBrains Mono, monospace' }}
-              >
-                <Eye className="w-4 h-4" />
-                <span>EVALUATE ARTWORK</span>
-              </button>
-            </div>
-          </div>
-        </header>
+        <Header />
 
         {/* Hero Section */}
-        <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center text-center px-6 relative pt-0" style={{ transform: 'translateY(-8rem)' }}>
+        <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center text-center px-6 relative pt-0" style={{ transform: 'translateY(-8rem)', zIndex: 1 }}>
           <div className="relative flex flex-col items-center justify-center">
             {/* All the balls and stars animations stays the same */}
-            <svg width="1400" height="1200" className="absolute">
+            <svg width="1400" height="1200" className="absolute" style={{ zIndex: -1 }}>
               <defs>
                 <linearGradient id="ballGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#dc2626" />
@@ -535,6 +552,18 @@ const VasariPlatform = () => {
                   <stop offset="100%" stopColor="#dc2626" />
                 </linearGradient>
               </defs>
+              
+              {/* Define a clipping mask to exclude the center area */}
+              <defs>
+                <mask id="centerMask">
+                  <rect x="0" y="0" width="1400" height="1200" fill="white" />
+                  {/* Cut out center area where title is - approximate position */}
+                  <rect x="500" y="400" width="400" height="400" fill="black" />
+                </mask>
+              </defs>
+              
+              {/* Apply mask to a group containing all animated elements */}
+              <g mask="url(#centerMask)">
               
               {/* Ball 1 - Top edge (clockwise, faster) - STAR */}
               <path 
@@ -989,6 +1018,7 @@ const VasariPlatform = () => {
                   animation: 'squareOrbitCounterClockwise 1.4s linear infinite'
                 }}
               />
+              </g>
             </svg>
             
             {/* Text content in vertical stack */}
@@ -1106,24 +1136,32 @@ const VasariPlatform = () => {
             
             @keyframes squareOrbitClockwise {
               0% { transform: translate(0, 0); }
+              12.5% { transform: translate(250px, 0); }
               25% { transform: translate(520px, 0); }
+              37.5% { transform: translate(520px, 250px); }
               50% { transform: translate(520px, 620px); }
+              62.5% { transform: translate(250px, 620px); }
               75% { transform: translate(0, 620px); }
+              87.5% { transform: translate(0, 250px); }
               100% { transform: translate(0, 0); }
             }
             
             @keyframes squareOrbitCounterClockwise {
               0% { transform: translate(0, 0); }
+              12.5% { transform: translate(0, 250px); }
               25% { transform: translate(0, 620px); }
+              37.5% { transform: translate(-250px, 620px); }
               50% { transform: translate(-520px, 620px); }
+              62.5% { transform: translate(-520px, 250px); }
               75% { transform: translate(-520px, 0); }
+              87.5% { transform: translate(-250px, 0); }
               100% { transform: translate(0, 0); }
             }
           `}</style>
         </section>
 
         {/* What we do Section */}
-        <section className="py-32 px-6 bg-gray-50">
+        <section className="py-32 px-6 bg-gray-50 relative" style={{ zIndex: 10 }}>
           <div className="max-w-4xl mx-auto">
             <p className="text-gray-500 text-lg mb-8">What we do</p>
             <div className="space-y-8 text-4xl text-gray-900 leading-relaxed">
@@ -1241,7 +1279,7 @@ const VasariPlatform = () => {
                 <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-red-600 rounded-full mx-auto mb-6 flex items-center justify-center border-2 border-blue-300">
                   <span className="text-3xl font-bold text-white">HQ</span>
                 </div>
-                <p className="text-blue-600 font-medium mb-3">Co-Founder & CPO</p>
+                <p className="text-blue-600 font-medium mb-3">Co-Founder & CEO</p>
                 <p className="text-gray-600">AI database development and outreach</p>
               </div>
               
@@ -1249,7 +1287,7 @@ const VasariPlatform = () => {
                 <div className="w-24 h-24 bg-gradient-to-br from-gray-700 to-blue-600 rounded-full mx-auto mb-6 flex items-center justify-center border-2 border-gray-400">
                   <span className="text-3xl font-bold text-white">SD</span>
                 </div>
-                <p className="text-gray-800 font-medium mb-3">Co-Founder & Chief Scientist</p>
+                <p className="text-gray-800 font-medium mb-3">Co-Founder & COO</p>
                 <p className="text-gray-600">AI analytics and research</p>
               </div>
               
@@ -1257,7 +1295,7 @@ const VasariPlatform = () => {
                 <div className="w-24 h-24 bg-gradient-to-br from-red-500 to-gray-700 rounded-full mx-auto mb-6 flex items-center justify-center border-2 border-red-300">
                   <span className="text-3xl font-bold text-white">CS</span>
                 </div>
-                <p className="text-red-600 font-medium mb-3">Co-Founder & Brand Director</p>
+                <p className="text-red-600 font-medium mb-3">Co-Founder & CFO</p>
                 <p className="text-gray-600">Software engineer</p>
               </div>
               
@@ -1288,44 +1326,19 @@ const VasariPlatform = () => {
   };
 
   const EvaluationPage = () => (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Eye className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">Vasari</h1>
-                <p className="text-sm text-gray-500">Professional Art Evaluation Platform</p>
-              </div>
-            </div>
-            <div className="flex items-center space-x-4">
-              <button
-                onClick={() => setCurrentPage('landing')}
-                className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
-              >
-                ← Back to Home
-              </button>
-              <span className="text-sm text-gray-600">AI-Powered Analysis</span>
-              <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-white">
+      <Header />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Search and Upload Section */}
-        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-semibold text-gray-900">Art Evaluation</h2>
             <div className="flex space-x-2">
               <button
                 onClick={() => {setUploadMode(false); setUploadedImage(null);}}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  !uploadMode ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:text-gray-900'
+                  !uploadMode ? 'bg-gradient-to-r from-red-600 to-blue-600 text-white' : 'text-gray-600 hover:text-gray-900 bg-gray-100'
                 }`}
               >
                 Search Database
@@ -1333,7 +1346,7 @@ const VasariPlatform = () => {
               <button
                 onClick={() => setUploadMode(true)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  uploadMode ? 'bg-blue-100 text-blue-700' : 'text-gray-600 hover:text-gray-900'
+                  uploadMode ? 'bg-gradient-to-r from-red-600 to-blue-600 text-white' : 'text-gray-600 hover:text-gray-900 bg-gray-100'
                 }`}
               >
                 Upload Image
@@ -1356,7 +1369,7 @@ const VasariPlatform = () => {
               <button
                 onClick={handleSearch}
                 disabled={loading || !searchQuery.trim()}
-                className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 disabled:opacity-50 flex items-center space-x-2"
+                className="px-6 py-3 bg-gradient-to-r from-red-600 to-blue-600 text-white rounded-lg hover:from-red-700 hover:to-blue-700 disabled:opacity-50 flex items-center space-x-2"
               >
                 <Search className="w-5 h-5" />
                 <span>{loading ? 'Analyzing...' : 'Evaluate'}</span>
@@ -1386,7 +1399,7 @@ const VasariPlatform = () => {
                         onChange={(e) => e.target.files[0] && handleImageUpload(e.target.files[0])}
                         className="hidden"
                       />
-                      <div className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center space-x-2">
+                      <div className="px-4 py-2 bg-gradient-to-r from-red-600 to-blue-600 text-white rounded-lg hover:from-red-700 hover:to-blue-700 flex items-center space-x-2">
                         <Camera className="w-4 h-4" />
                         <span>Choose File</span>
                       </div>
@@ -1420,7 +1433,7 @@ const VasariPlatform = () => {
                     <button
                       onClick={() => analyzeUploadedArtwork(uploadedImage.file, uploadedImage.url)}
                       disabled={loading}
-                      className="px-6 py-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:from-blue-700 hover:to-purple-700 disabled:opacity-50"
+                      className="px-6 py-2 bg-gradient-to-r from-red-600 to-blue-600 text-white rounded-lg hover:from-red-700 hover:to-blue-700 disabled:opacity-50"
                     >
                       {loading ? 'Analyzing...' : 'Analyze Artwork'}
                     </button>
@@ -1434,7 +1447,7 @@ const VasariPlatform = () => {
         {loading && (
           <div className="bg-white rounded-xl shadow-lg p-8 mb-8">
             <div className="flex items-center justify-center space-x-4">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600"></div>
               <div className="text-lg text-gray-600">
                 {uploadMode || uploadedImage ? 
                   'AI is analyzing your uploaded artwork for pricing, authenticity, and investment potential...' :
@@ -1524,7 +1537,7 @@ const VasariPlatform = () => {
               {/* Price Analysis */}
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <DollarSign className="w-6 h-6 text-green-600" />
+                  <DollarSign className="w-6 h-6 text-red-600" />
                   <h3 className="text-xl font-semibold text-gray-900">Price Analysis</h3>
                 </div>
                 
@@ -1597,7 +1610,7 @@ const VasariPlatform = () => {
               {/* Investment Metrics */}
               <div className="bg-white rounded-xl shadow-lg p-6">
                 <div className="flex items-center space-x-3 mb-4">
-                  <BarChart3 className="w-6 h-6 text-purple-600" />
+                  <BarChart3 className="w-6 h-6 text-blue-600" />
                   <h3 className="text-xl font-semibold text-gray-900">Investment Metrics</h3>
                 </div>
                 
@@ -1605,14 +1618,17 @@ const VasariPlatform = () => {
                   <div>
                     <p className="text-sm text-gray-500">ROI Score</p>
                     <div className="flex items-center space-x-2">
-                      <span className="text-3xl font-bold text-purple-600">
+                      <span className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">
                         {selectedArtwork.roi.score}/10
                       </span>
                       <div className="flex-1">
                         <div className="bg-gray-200 rounded-full h-2">
                           <div 
-                            className="bg-purple-500 h-2 rounded-full"
-                            style={{ width: `${selectedArtwork.roi.score * 10}%` }}
+                            className="h-2 rounded-full"
+                            style={{ 
+                              width: `${selectedArtwork.roi.score * 10}%`,
+                              background: 'linear-gradient(to right, #dc2626, #2563eb)'
+                            }}
                           ></div>
                         </div>
                       </div>
@@ -1670,14 +1686,14 @@ const VasariPlatform = () => {
                 </div>
               </div>
               
-              <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+              <div className="mt-6 p-4 bg-gradient-to-r from-red-50 to-blue-50 rounded-lg border border-red-200">
                 <div className="flex items-start space-x-3">
-                  <AlertTriangle className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <AlertTriangle className="w-5 h-5 text-red-600 mt-0.5" />
                   <div>
-                    <h5 className="font-semibold text-blue-900">
+                    <h5 className="font-semibold text-gray-900">
                       {selectedArtwork.id === 'uploaded' ? 'AI Analysis Recommendation' : 'Investment Recommendation'}
                     </h5>
-                    <p className="text-sm text-blue-700 mt-1">
+                    <p className="text-sm text-gray-700 mt-1">
                       {selectedArtwork.id === 'uploaded' ? 
                         'This analysis is based on visual AI assessment. For accurate valuation and authentication, consult a certified art appraiser and conduct physical examination.' :
                         `${selectedArtwork.roi.projection}. Consider this artwork for portfolio diversification with a medium to long-term investment horizon.`
@@ -1717,12 +1733,669 @@ const VasariPlatform = () => {
     </div>
   );
 
+  // Vasari V.01 Page Component
+  const VasariV01Page = () => {
+    const mountRef = useRef(null);
+    const sceneRef = useRef(null);
+    const rendererRef = useRef(null);
+    const frameRef = useRef(null);
+    const cameraRef = useRef(null);
+    const raycasterRef = useRef(null);
+    const mouseRef = useRef({ x: 0, y: 0 }); // Use plain object initially
+    const [activeFolder, setActiveFolder] = useState(null);
+    const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+    const [isDraggingWindow, setIsDraggingWindow] = useState(false);
+    const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+      if (!mountRef.current) return;
+      
+      // Check if renderer already exists to prevent double initialization
+      if (rendererRef.current) return;
+
+      // Import Three.js
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+      script.async = true;
+      
+      script.onload = () => {
+        if (!window.THREE || !mountRef.current) return;
+        
+        // Double-check renderer doesn't exist
+        if (rendererRef.current) return;
+
+        // Scene setup
+        const scene = new window.THREE.Scene();
+        scene.background = new window.THREE.Color(0xffffff);
+        sceneRef.current = scene;
+
+        // Camera setup
+        const camera = new window.THREE.PerspectiveCamera(
+          75,
+          window.innerWidth / (window.innerHeight - 88),
+          0.1,
+          1000
+        );
+        camera.position.z = 5;
+        cameraRef.current = camera;
+
+        // Renderer setup
+        const renderer = new window.THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight - 88);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        mountRef.current.appendChild(renderer.domElement);
+        rendererRef.current = renderer;
+
+        // Raycaster for mouse interaction
+        const raycaster = new window.THREE.Raycaster();
+        raycasterRef.current = raycaster;
+
+        // Create wireframe box using rectangular prisms for edges
+        const boxGroup = new window.THREE.Group();
+        const edgeThickness = 0.03; // Thickness of the edges - reduced
+        const boxSize = 1.0; // Reduced from 1.5
+        
+        // Material for edges with gradient effect
+        const edgeMaterial = new window.THREE.MeshBasicMaterial({ color: 0xdc2626 });
+        const edgeMaterialBlue = new window.THREE.MeshBasicMaterial({ color: 0x2563eb });
+        
+        // Create 12 edges of the box
+        // Bottom edges (red)
+        const bottomEdges = [
+          { pos: [0, -boxSize/2, -boxSize/2], rot: [0, 0, 0], size: [boxSize, edgeThickness, edgeThickness] },
+          { pos: [0, -boxSize/2, boxSize/2], rot: [0, 0, 0], size: [boxSize, edgeThickness, edgeThickness] },
+          { pos: [-boxSize/2, -boxSize/2, 0], rot: [0, Math.PI/2, 0], size: [boxSize, edgeThickness, edgeThickness] },
+          { pos: [boxSize/2, -boxSize/2, 0], rot: [0, Math.PI/2, 0], size: [boxSize, edgeThickness, edgeThickness] }
+        ];
+        
+        bottomEdges.forEach(edge => {
+          const geometry = new window.THREE.BoxGeometry(...edge.size);
+          const mesh = new window.THREE.Mesh(geometry, edgeMaterial);
+          mesh.position.set(...edge.pos);
+          mesh.rotation.set(...edge.rot);
+          boxGroup.add(mesh);
+        });
+        
+        // Top edges (blue)
+        const topEdges = [
+          { pos: [0, boxSize/2, -boxSize/2], rot: [0, 0, 0], size: [boxSize, edgeThickness, edgeThickness] },
+          { pos: [0, boxSize/2, boxSize/2], rot: [0, 0, 0], size: [boxSize, edgeThickness, edgeThickness] },
+          { pos: [-boxSize/2, boxSize/2, 0], rot: [0, Math.PI/2, 0], size: [boxSize, edgeThickness, edgeThickness] },
+          { pos: [boxSize/2, boxSize/2, 0], rot: [0, Math.PI/2, 0], size: [boxSize, edgeThickness, edgeThickness] }
+        ];
+        
+        topEdges.forEach(edge => {
+          const geometry = new window.THREE.BoxGeometry(...edge.size);
+          const mesh = new window.THREE.Mesh(geometry, edgeMaterialBlue);
+          mesh.position.set(...edge.pos);
+          mesh.rotation.set(...edge.rot);
+          boxGroup.add(mesh);
+        });
+        
+        // Vertical edges (gradient from red to blue)
+        const verticalEdges = [
+          { pos: [-boxSize/2, 0, -boxSize/2] },
+          { pos: [boxSize/2, 0, -boxSize/2] },
+          { pos: [-boxSize/2, 0, boxSize/2] },
+          { pos: [boxSize/2, 0, boxSize/2] }
+        ];
+        
+        verticalEdges.forEach(edge => {
+          const geometry = new window.THREE.BoxGeometry(edgeThickness, boxSize, edgeThickness);
+          
+          // Create gradient material using vertex colors
+          const material = new window.THREE.MeshBasicMaterial({ vertexColors: true });
+          
+          // Apply gradient colors to vertices
+          const colors = [];
+          const positionAttribute = geometry.attributes.position;
+          for (let i = 0; i < positionAttribute.count; i++) {
+            const y = positionAttribute.getY(i);
+            const t = (y + boxSize/2) / boxSize;
+            const r = 0xdc * (1 - t) + 0x25 * t;
+            const g = 0x26 * (1 - t) + 0x63 * t;
+            const b = 0x26 * (1 - t) + 0xeb * t;
+            colors.push(r/255, g/255, b/255);
+          }
+          geometry.setAttribute('color', new window.THREE.Float32BufferAttribute(colors, 3));
+          
+          const mesh = new window.THREE.Mesh(geometry, material);
+          mesh.position.set(...edge.pos);
+          boxGroup.add(mesh);
+        });
+        
+        // Add grid to each face
+        const gridDivisions = 5;
+        const gridThickness = 0.005; // Thickness of grid lines
+        const gridMaterial = new window.THREE.MeshBasicMaterial({ color: 0x888888, opacity: 0.3, transparent: true });
+        
+        // Function to create grid lines for a face
+        const createFaceGrid = (position, rotation) => {
+          const gridGroup = new window.THREE.Group();
+          
+          // Horizontal lines
+          for (let i = 1; i < gridDivisions; i++) {
+            const offset = (i / gridDivisions - 0.5) * boxSize;
+            const geometry = new window.THREE.BoxGeometry(boxSize, gridThickness, gridThickness);
+            const line = new window.THREE.Mesh(geometry, gridMaterial);
+            line.position.set(0, offset, 0);
+            gridGroup.add(line);
+          }
+          
+          // Vertical lines
+          for (let i = 1; i < gridDivisions; i++) {
+            const offset = (i / gridDivisions - 0.5) * boxSize;
+            const geometry = new window.THREE.BoxGeometry(gridThickness, boxSize, gridThickness);
+            const line = new window.THREE.Mesh(geometry, gridMaterial);
+            line.position.set(offset, 0, 0);
+            gridGroup.add(line);
+          }
+          
+          gridGroup.position.set(...position);
+          gridGroup.rotation.set(...rotation);
+          return gridGroup;
+        };
+        
+        // Create grids for all 6 faces
+        const faces = [
+          { pos: [0, 0, boxSize/2], rot: [0, 0, 0] }, // Front
+          { pos: [0, 0, -boxSize/2], rot: [0, Math.PI, 0] }, // Back
+          { pos: [boxSize/2, 0, 0], rot: [0, Math.PI/2, 0] }, // Right
+          { pos: [-boxSize/2, 0, 0], rot: [0, -Math.PI/2, 0] }, // Left
+          { pos: [0, boxSize/2, 0], rot: [Math.PI/2, 0, 0] }, // Top
+          { pos: [0, -boxSize/2, 0], rot: [-Math.PI/2, 0, 0] } // Bottom
+        ];
+        
+        faces.forEach(face => {
+          boxGroup.add(createFaceGrid(face.pos, face.rot));
+        });
+        
+        scene.add(boxGroup);
+        
+        // Move the box and icosahedron up
+        boxGroup.position.y = 0.5;
+        
+        // Create shadow for the cube
+        const cubeShadowGeometry = new window.THREE.PlaneGeometry(1.5, 1.5);
+        
+        // Create canvas for gradient shadow
+        const shadowCanvas = document.createElement('canvas');
+        shadowCanvas.width = 256;
+        shadowCanvas.height = 256;
+        const shadowCtx = shadowCanvas.getContext('2d');
+        
+        // Create radial gradient
+        const shadowGradient = shadowCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
+        shadowGradient.addColorStop(0, 'rgba(0, 0, 0, 0.4)');
+        shadowGradient.addColorStop(0.3, 'rgba(0, 0, 0, 0.25)');
+        shadowGradient.addColorStop(0.6, 'rgba(0, 0, 0, 0.1)');
+        shadowGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+        
+        shadowCtx.fillStyle = shadowGradient;
+        shadowCtx.fillRect(0, 0, 256, 256);
+        
+        const cubeShadowTexture = new window.THREE.CanvasTexture(shadowCanvas);
+        const cubeShadowMaterial = new window.THREE.MeshBasicMaterial({
+          map: cubeShadowTexture,
+          transparent: true,
+          side: window.THREE.DoubleSide,
+          depthWrite: false
+        });
+        
+        const cubeShadow = new window.THREE.Mesh(cubeShadowGeometry, cubeShadowMaterial);
+        cubeShadow.rotation.x = -Math.PI / 2;
+        cubeShadow.position.set(0, -0.8, 0); // Position below the cube
+        scene.add(cubeShadow);
+
+        // Create folder visual
+        const createFolder = (x, y, z, scale = 1, label = '', artworkUrl = '') => {
+          const folderGroup = new window.THREE.Group();
+          
+          // Create rounded box geometry
+          const createRoundedBoxGeometry = (width, height, depth, radius) => {
+            const shape = new window.THREE.Shape();
+            const halfWidth = width / 2;
+            const halfHeight = height / 2;
+            
+            shape.moveTo(-halfWidth + radius, -halfHeight);
+            shape.lineTo(halfWidth - radius, -halfHeight);
+            shape.quadraticCurveTo(halfWidth, -halfHeight, halfWidth, -halfHeight + radius);
+            shape.lineTo(halfWidth, halfHeight - radius);
+            shape.quadraticCurveTo(halfWidth, halfHeight, halfWidth - radius, halfHeight);
+            shape.lineTo(-halfWidth + radius, halfHeight);
+            shape.quadraticCurveTo(-halfWidth, halfHeight, -halfWidth, halfHeight - radius);
+            shape.lineTo(-halfWidth, -halfHeight + radius);
+            shape.quadraticCurveTo(-halfWidth, -halfHeight, -halfWidth + radius, -halfHeight);
+            
+            const extrudeSettings = {
+              depth: depth,
+              bevelEnabled: true,
+              bevelThickness: 0.005,
+              bevelSize: 0.005,
+              bevelSegments: 2
+            };
+            
+            return new window.THREE.ExtrudeGeometry(shape, extrudeSettings);
+          };
+          
+          // Create shadow plane
+          const shadowGeometry = new window.THREE.PlaneGeometry(0.8 * scale, 0.6 * scale);
+          
+          // Create a canvas for gradient shadow texture
+          const canvas = document.createElement('canvas');
+          canvas.width = 128;
+          canvas.height = 128;
+          const ctx = canvas.getContext('2d');
+          
+          // Create radial gradient for soft shadow effect
+          const gradient = ctx.createRadialGradient(64, 64, 0, 64, 64, 64);
+          gradient.addColorStop(0, 'rgba(0, 0, 0, 0.3)');
+          gradient.addColorStop(0.5, 'rgba(0, 0, 0, 0.15)');
+          gradient.addColorStop(0.8, 'rgba(0, 0, 0, 0.05)');
+          gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+          
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, 128, 128);
+          
+          // Create texture from canvas
+          const shadowTexture = new window.THREE.CanvasTexture(canvas);
+          
+          const shadowMaterial = new window.THREE.MeshBasicMaterial({ 
+            map: shadowTexture,
+            transparent: true,
+            side: window.THREE.DoubleSide,
+            depthWrite: false
+          });
+          const shadow = new window.THREE.Mesh(shadowGeometry, shadowMaterial);
+          shadow.rotation.x = -Math.PI / 2; // Rotate to be horizontal
+          shadow.position.set(0, -0.7 * scale, 0); // Position below folder and text
+          folderGroup.add(shadow);
+          
+          // Folder back part with rounded corners
+          const folderBackGeometry = createRoundedBoxGeometry(0.7 * scale, 0.5 * scale, 0.02 * scale, 0.03 * scale);
+          const folderMaterial = new window.THREE.MeshBasicMaterial({ color: 0x5DADE2 }); // Light blue
+          const folderBack = new window.THREE.Mesh(folderBackGeometry, folderMaterial);
+          folderBack.position.set(0, 0, -0.01 * scale);
+          folderGroup.add(folderBack);
+          
+          // Folder tab with rounded corners
+          const tabGeometry = createRoundedBoxGeometry(0.15 * scale, 0.05 * scale, 0.02 * scale, 0.01 * scale);
+          const tab = new window.THREE.Mesh(tabGeometry, folderMaterial);
+          tab.position.set(-0.275 * scale, 0.275 * scale, -0.01 * scale);
+          folderGroup.add(tab);
+          
+          // Folder front part with rounded corners (slightly darker blue)
+          const folderFrontMaterial = new window.THREE.MeshBasicMaterial({ color: 0x3498DB });
+          const folderFrontGeometry = createRoundedBoxGeometry(0.68 * scale, 0.48 * scale, 0.02 * scale, 0.03 * scale);
+          const folderFront = new window.THREE.Mesh(folderFrontGeometry, folderFrontMaterial);
+          folderFront.position.set(0, -0.02 * scale, 0.01 * scale);
+          folderGroup.add(folderFront);
+          
+          // Add text label
+          if (label) {
+            const labelCanvas = document.createElement('canvas');
+            labelCanvas.width = 256;
+            labelCanvas.height = 64;
+            const labelCtx = labelCanvas.getContext('2d');
+            
+            labelCtx.font = `${scale < 1 ? 40 : 32 * scale}px Arial`;
+            labelCtx.fillStyle = '#333333';
+            labelCtx.textAlign = 'center';
+            labelCtx.textBaseline = 'middle';
+            labelCtx.fillText(label, 128, 32);
+            
+            const labelTexture = new window.THREE.CanvasTexture(labelCanvas);
+            const labelMaterial = new window.THREE.MeshBasicMaterial({ 
+              map: labelTexture,
+              transparent: true,
+              side: window.THREE.DoubleSide
+            });
+            
+            const labelGeometry = new window.THREE.PlaneGeometry(0.8 * scale, 0.2 * scale);
+            const labelMesh = new window.THREE.Mesh(labelGeometry, labelMaterial);
+            labelMesh.position.set(0, -0.5 * scale, 0.02);
+            folderGroup.add(labelMesh);
+          }
+          
+          // Position folder
+          folderGroup.position.set(x, y, z);
+          // No rotation - folder faces directly toward the user
+          
+          // Store shadow reference and artwork URL for animation
+          folderGroup.userData.shadow = shadow;
+          folderGroup.userData.artworkUrl = artworkUrl;
+          folderGroup.userData.artistName = label;
+          
+          return folderGroup;
+        };
+        
+        // Artwork data mapping
+        const artworkData = {
+          'Basquiat': '/images/artworks/Basquiat.jpeg',
+          'Mondrian': '/images/artworks/Mondrian.jpeg',
+          'Picasso': '/images/artworks/Picasso.webp',
+          'Monet': '/images/artworks/Monet.jpg',
+          'Van Gogh': '/images/artworks/Van Gogh.png',
+          'Magritte': '/images/artworks/Magritte.png'
+        };
+        
+        // Create 6 folders at different positions with artist names and artwork URLs
+        // Back folders (smaller size)
+        const folder1 = createFolder(3.5, 2.0, 0, 0.8, 'Picasso', artworkData['Picasso']);    // Top right
+        const folder2 = createFolder(-3.5, 2.0, 0, 0.8, 'Basquiat', artworkData['Basquiat']);   // Top left
+        const folder5 = createFolder(0, 2.5, 0, 0.8, 'Mondrian', artworkData['Mondrian']);      // Top center
+        
+        // Front folders (larger size)
+        const folder3 = createFolder(3.5, -2.0, 0, 1.3, 'Magritte', artworkData['Magritte']);   // Bottom right
+        const folder4 = createFolder(-3.5, -2.0, 0, 1.3, 'Van Gogh', artworkData['Van Gogh']);  // Bottom left
+        const folder6 = createFolder(0, -2.5, 0, 1.3, 'Monet', artworkData['Monet']);     // Bottom center
+        
+        scene.add(folder1);
+        scene.add(folder2);
+        scene.add(folder3);
+        scene.add(folder4);
+        scene.add(folder5);
+        scene.add(folder6);
+        
+        // Store folders in array for animation
+        const folders = [folder1, folder2, folder3, folder4, folder5, folder6];
+        const initialPositions = folders.map(folder => ({
+          x: folder.position.x,
+          y: folder.position.y,
+          z: folder.position.z
+        }));
+
+        // Mouse event handlers
+        const handleMouseMove = (event) => {
+          const rect = renderer.domElement.getBoundingClientRect();
+          mouseRef.current.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+          mouseRef.current.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+        };
+
+        const handleClick = (event) => {
+          event.preventDefault();
+          
+          raycaster.setFromCamera(mouseRef.current, camera);
+          const intersects = raycaster.intersectObjects(folders, true);
+          
+          if (intersects.length > 0) {
+            let clickedObject = intersects[0].object;
+            let folderGroup = clickedObject;
+            
+            // Find the parent folder group
+            while (folderGroup.parent && !folderGroup.userData.artistName) {
+              folderGroup = folderGroup.parent;
+            }
+            
+            if (folderGroup.userData.artistName && folderGroup.userData.artworkUrl) {
+              // Convert 3D position to screen coordinates
+              const vector = new window.THREE.Vector3();
+              folderGroup.getWorldPosition(vector);
+              vector.project(camera);
+              
+              const canvas = renderer.domElement;
+              const rect = canvas.getBoundingClientRect();
+              
+              // Convert to actual screen coordinates
+              const x = ((vector.x + 1) / 2) * rect.width + rect.left;
+              let y = ((1 - vector.y) / 2) * rect.height + rect.top - 88; // Subtract header height
+              
+              // Adjust Y position for Mondrian (top center folder)
+              if (folderGroup.userData.artistName === 'Mondrian') {
+                y = y - 50; // Move down by reducing the upward offset
+              } else {
+                y = y - 150; // Normal position above folder
+              }
+              
+              setPopupPosition({ x, y });
+              setActiveFolder({
+                name: folderGroup.userData.artistName,
+                artworkUrl: folderGroup.userData.artworkUrl
+              });
+            }
+          }
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        renderer.domElement.addEventListener('click', handleClick);
+
+        // Create icosahedron inside the box
+        const icosahedronGeometry = new window.THREE.IcosahedronGeometry(0.7, 0); // Reduced from 1.0
+        
+        // Create gradient material using vertex colors
+        const icosahedronMaterial = new window.THREE.MeshBasicMaterial({ 
+          vertexColors: true,
+          wireframe: false
+        });
+        
+        // Apply gradient colors based on vertex height
+        const colors = [];
+        const positionAttribute = icosahedronGeometry.attributes.position;
+        const color1 = new window.THREE.Color(0xdc2626); // red
+        const color2 = new window.THREE.Color(0x2563eb); // blue
+        
+        for (let i = 0; i < positionAttribute.count; i++) {
+          const y = positionAttribute.getY(i);
+          const t = (y + 1.0) / 2.0; // normalize y position (-1 to 1 becomes 0 to 1)
+          const color = color1.clone().lerp(color2, t);
+          colors.push(color.r, color.g, color.b);
+        }
+        
+        icosahedronGeometry.setAttribute('color', new window.THREE.Float32BufferAttribute(colors, 3));
+        
+        const icosahedron = new window.THREE.Mesh(icosahedronGeometry, icosahedronMaterial);
+        icosahedron.position.y = 0.5; // Move up to match box position
+        scene.add(icosahedron);
+
+        // Create edge geometry for icosahedron outline with thicker lines
+        const edges = new window.THREE.EdgesGeometry(icosahedronGeometry);
+        const edgeVertices = edges.attributes.position.array;
+        
+        // Create thick edges using cylinders
+        const edgeRadius = 0.015; // Thickness of the edges - reduced
+        const edgeMat = new window.THREE.MeshBasicMaterial({ color: 0xffffff });
+        
+        for (let i = 0; i < edgeVertices.length; i += 6) {
+          const start = new window.THREE.Vector3(edgeVertices[i], edgeVertices[i + 1], edgeVertices[i + 2]);
+          const end = new window.THREE.Vector3(edgeVertices[i + 3], edgeVertices[i + 4], edgeVertices[i + 5]);
+          
+          const direction = new window.THREE.Vector3().subVectors(end, start);
+          const length = direction.length();
+          direction.normalize();
+          
+          const cylinderGeometry = new window.THREE.CylinderGeometry(edgeRadius, edgeRadius, length, 6);
+          const cylinder = new window.THREE.Mesh(cylinderGeometry, edgeMat);
+          
+          // Position and orient the cylinder
+          const midpoint = new window.THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
+          cylinder.position.copy(midpoint);
+          
+          // Align cylinder with edge
+          const up = new window.THREE.Vector3(0, 1, 0);
+          const quaternion = new window.THREE.Quaternion().setFromUnitVectors(up, direction);
+          cylinder.quaternion.copy(quaternion);
+          
+          icosahedron.add(cylinder);
+        }
+
+        // Animation loop
+        const animate = () => {
+          frameRef.current = requestAnimationFrame(animate);
+
+          // Rotate both objects slowly
+          boxGroup.rotation.x += 0.005;
+          boxGroup.rotation.y += 0.005;
+          
+          icosahedron.rotation.x += 0.02;
+          icosahedron.rotation.y += 0.02;
+          
+          // Animate folders floating
+          const time = Date.now() * 0.001; // Convert to seconds
+          folders.forEach((folder, index) => {
+            const offset = index * 0.5; // Different phase for each folder
+            
+            // Vertical floating motion
+            const floatHeight = Math.sin(time * 0.8 + offset) * 0.1;
+            folder.position.y = initialPositions[index].y + floatHeight;
+            
+            // Slight horizontal drift
+            folder.position.x = initialPositions[index].x + Math.sin(time * 0.6 + offset + Math.PI/2) * 0.05;
+            
+            // Very subtle tilt (not full rotation)
+            folder.rotation.z = Math.sin(time * 0.7 + offset) * 0.02; // Max 1.15 degrees
+            folder.rotation.x = Math.sin(time * 0.9 + offset + Math.PI/3) * 0.015; // Max 0.86 degrees
+            
+            // Animate shadow - gets smaller/more transparent when folder is higher
+            if (folder.userData.shadow) {
+              const shadowScale = 1 - (floatHeight * 0.3); // Shadow shrinks as folder rises
+              folder.userData.shadow.scale.set(shadowScale, shadowScale, 1);
+              folder.userData.shadow.material.opacity = 0.8 * shadowScale; // Fade as it rises
+            }
+          });
+
+          renderer.render(scene, camera);
+        };
+
+        animate();
+
+        // Handle resize
+        const handleResize = () => {
+          camera.aspect = window.innerWidth / (window.innerHeight - 88);
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight - 88);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        // Cleanup function
+        return () => {
+          window.removeEventListener('resize', handleResize);
+          window.removeEventListener('mousemove', handleMouseMove);
+          if (renderer.domElement) {
+            renderer.domElement.removeEventListener('click', handleClick);
+          }
+          if (frameRef.current) {
+            cancelAnimationFrame(frameRef.current);
+          }
+          if (mountRef.current && renderer.domElement) {
+            mountRef.current.removeChild(renderer.domElement);
+          }
+          renderer.dispose();
+        };
+      };
+
+      document.head.appendChild(script);
+
+      return () => {
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      };
+    }, []);
+
+    // Handle window dragging
+    const handleWindowMouseDown = (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      setDragOffset({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      });
+      setIsDraggingWindow(true);
+    };
+
+    const handleWindowMouseMove = (e) => {
+      if (isDraggingWindow) {
+        setPopupPosition({
+          x: e.clientX - dragOffset.x,
+          y: e.clientY - dragOffset.y
+        });
+      }
+    };
+
+    const handleWindowMouseUp = () => {
+      setIsDraggingWindow(false);
+    };
+
+    useEffect(() => {
+      if (isDraggingWindow) {
+        window.addEventListener('mousemove', handleWindowMouseMove);
+        window.addEventListener('mouseup', handleWindowMouseUp);
+        
+        return () => {
+          window.removeEventListener('mousemove', handleWindowMouseMove);
+          window.removeEventListener('mouseup', handleWindowMouseUp);
+        };
+      }
+    }, [isDraggingWindow, dragOffset]);
+
+    return (
+      <div className="min-h-screen bg-white">
+        <Header />
+        <div ref={mountRef} style={{ width: '100%', height: 'calc(100vh - 88px)', position: 'relative' }} />
+        
+        {/* Mac-style Finder Popup */}
+        {activeFolder && (
+          <div
+            className="fixed bg-gray-100 rounded-lg shadow-2xl overflow-hidden"
+            style={{
+              left: `${popupPosition.x}px`,
+              top: `${popupPosition.y}px`,
+              width: '300px',
+              zIndex: 1000,
+              cursor: isDraggingWindow ? 'grabbing' : 'auto'
+            }}
+          >
+            {/* Mac window title bar */}
+            <div 
+              className="bg-gradient-to-b from-gray-300 to-gray-400 px-3 py-2 flex items-center justify-between cursor-grab active:cursor-grabbing"
+              onMouseDown={handleWindowMouseDown}
+            >
+              <div className="flex space-x-2">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveFolder(null);
+                  }}
+                  className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors"
+                />
+                <button className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors" />
+                <button className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors" />
+              </div>
+              <span className="text-xs font-medium text-gray-700 select-none">{activeFolder.name}</span>
+              <div className="w-14" /> {/* Spacer for centering */}
+            </div>
+            
+            {/* Content area */}
+            <div className="bg-white p-4">
+              <div className="bg-gray-50 rounded-lg p-2 mb-2">
+                <img
+                  src={activeFolder.artworkUrl}
+                  alt={`${activeFolder.name} artwork`}
+                  className="w-full h-48 object-contain rounded"
+                  onError={(e) => {
+                    e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Found';
+                  }}
+                />
+              </div>
+              <div className="text-center">
+                <p className="text-sm font-medium text-gray-800">{activeFolder.name}</p>
+                <p className="text-xs text-gray-500 mt-1">Click and drag to evaluate</p>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
   // Main render logic
   if (currentPage === 'landing') {
     return <LandingPage />;
+  } else if (currentPage === 'vasari-v01') {
+    return <VasariV01Page />;
   }
 
   return <EvaluationPage />;
 };
 
-export default VasariPlatform;
+export default VasariPlatform; 
