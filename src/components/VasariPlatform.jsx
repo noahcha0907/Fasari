@@ -1766,7 +1766,7 @@ const VasariPlatform = () => {
 
         // Scene setup
         const scene = new window.THREE.Scene();
-        scene.background = new window.THREE.Color(0xffffff);
+        scene.background = null; // Make scene background transparent
         sceneRef.current = scene;
 
         // Camera setup
@@ -1780,9 +1780,10 @@ const VasariPlatform = () => {
         cameraRef.current = camera;
 
         // Renderer setup
-        const renderer = new window.THREE.WebGLRenderer({ antialias: true });
+        const renderer = new window.THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight - 88);
         renderer.setPixelRatio(window.devicePixelRatio);
+        renderer.setClearColor(0x000000, 0); // Transparent background
         mountRef.current.appendChild(renderer.domElement);
         rendererRef.current = renderer;
 
@@ -2079,26 +2080,24 @@ const VasariPlatform = () => {
           'Magritte': '/images/artworks/Magritte.png'
         };
         
-        // Create 6 folders at different positions with artist names and artwork URLs
-        // Back folders (smaller size)
-        const folder1 = createFolder(3.5, 2.0, 0, 0.8, 'Picasso', artworkData['Picasso']);    // Top right
-        const folder2 = createFolder(-3.5, 2.0, 0, 0.8, 'Basquiat', artworkData['Basquiat']);   // Top left
-        const folder5 = createFolder(0, 2.5, 0, 0.8, 'Mondrian', artworkData['Mondrian']);      // Top center
+        // Create 5 folders at different positions with artist names and artwork URLs
+        // Back folders (smaller size) - moved much closer to front folders
+        const folder1 = createFolder(3.5, -0.5, 0, 0.8, 'Picasso', artworkData['Picasso']);    // Top right - moved down
+        const folder2 = createFolder(-3.5, -0.5, 0, 0.8, 'Basquiat', artworkData['Basquiat']);   // Top left - moved down
         
         // Front folders (larger size)
         const folder3 = createFolder(3.5, -2.0, 0, 1.3, 'Magritte', artworkData['Magritte']);   // Bottom right
         const folder4 = createFolder(-3.5, -2.0, 0, 1.3, 'Van Gogh', artworkData['Van Gogh']);  // Bottom left
-        const folder6 = createFolder(0, -2.5, 0, 1.3, 'Monet', artworkData['Monet']);     // Bottom center
+        const folder5 = createFolder(0, -2.5, 0, 1.3, 'Monet', artworkData['Monet']);     // Bottom center
         
         scene.add(folder1);
         scene.add(folder2);
         scene.add(folder3);
         scene.add(folder4);
         scene.add(folder5);
-        scene.add(folder6);
         
         // Store folders in array for animation
-        const folders = [folder1, folder2, folder3, folder4, folder5, folder6];
+        const folders = [folder1, folder2, folder3, folder4, folder5];
         const initialPositions = folders.map(folder => ({
           x: folder.position.x,
           y: folder.position.y,
@@ -2140,9 +2139,9 @@ const VasariPlatform = () => {
               const x = ((vector.x + 1) / 2) * rect.width + rect.left;
               let y = ((1 - vector.y) / 2) * rect.height + rect.top - 88; // Subtract header height
               
-              // Adjust Y position for Mondrian (top center folder)
-              if (folderGroup.userData.artistName === 'Mondrian') {
-                y = y - 50; // Move down by reducing the upward offset
+              // Adjust Y position for specific folders
+              if (folderGroup.userData.artistName === 'Basquiat' || folderGroup.userData.artistName === 'Picasso') {
+                y = y - 100; // Normal position for moved folders
               } else {
                 y = y - 150; // Normal position above folder
               }
@@ -2291,7 +2290,7 @@ const VasariPlatform = () => {
           script.parentNode.removeChild(script);
         }
       };
-    }, []);
+    }, []); // Empty dependency array ensures this runs only once
 
     // Handle window dragging
     const handleWindowMouseDown = (e) => {
@@ -2329,7 +2328,7 @@ const VasariPlatform = () => {
     }, [isDraggingWindow, dragOffset]);
 
     return (
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen" style={{ background: 'linear-gradient(to top, #2563eb 0%, #93c5fd 20%, #ffffff 40%)' }}>
         <Header />
         <div ref={mountRef} style={{ width: '100%', height: 'calc(100vh - 88px)', position: 'relative' }} />
         
