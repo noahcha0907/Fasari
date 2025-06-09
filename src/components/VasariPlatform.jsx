@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, TrendingUp, Shield, AlertTriangle, DollarSign, Eye, Calendar, MapPin, User, FileText, BarChart3, PieChart, Activity, Upload, Camera, X } from 'lucide-react';
+import { Search, TrendingUp, Shield, AlertTriangle, DollarSign, Eye, Calendar, MapPin, User, FileText, BarChart3, PieChart, Activity, Upload, Camera, X, ArrowLeftRight, Mail } from 'lucide-react';
 
 const VasariPlatform = () => {
   const [currentPage, setCurrentPage] = useState('landing');
@@ -15,15 +15,15 @@ const VasariPlatform = () => {
   const artDatabase = [
     {
       id: 1,
-      title: "Starry Night Over the Rhône",
-      artist: "Vincent van Gogh",
-      year: 1888,
-      medium: "Oil on canvas",
-      dimensions: "72.5 × 92 cm",
-      currentLocation: "Musée d'Orsay, Paris",
+      title: "Untitled",
+      artist: "Jean-Michel Basquiat",
+      year: 1982,
+      medium: "Acrylic and spray paint on canvas",
+      dimensions: "183 × 173 cm",
+      currentLocation: "Private Collection",
       imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-      estimatedValue: 150000000,
-      lastSalePrice: 82500000,
+      estimatedValue: 110500000,
+      lastSalePrice: 110500000,
       marketTrend: "rising",
       authenticity: {
         score: 95,
@@ -80,35 +80,72 @@ const VasariPlatform = () => {
     setLoading(true);
     setUploadMode(false);
     
+    // Check if the file is Basquiat
+    const isBasquiat = file.name.toLowerCase().includes('basquiat');
+    
     // Simulate AI analysis of uploaded artwork
     setTimeout(() => {
-      const analysisResult = {
-        id: 'uploaded',
-        title: "Uploaded Artwork",
-        artist: "Unknown Artist",
-        year: "Contemporary",
-        medium: "Mixed Media",
-        dimensions: "Estimated from image",
-        currentLocation: "Private Collection",
-        imageUrl: imageUrl,
-        estimatedValue: Math.floor(Math.random() * 50000) + 5000,
-        lastSalePrice: null,
-        marketTrend: "emerging",
-        authenticity: {
-          score: Math.floor(Math.random() * 40) + 50,
-          risk: Math.random() > 0.5 ? "Medium" : "High",
-          factors: [
-            "Image-based analysis only", 
-            "Style recognition performed", 
-            "Physical inspection required for full authentication"
-          ]
-        },
-        roi: {
-          score: Math.round((Math.floor(Math.random() * 40) + 30) / 10 * 10) / 10,
-          annualizedReturn: Math.floor(Math.random() * 15) + 5,
-          projection: "Speculative investment - requires market validation"
-        }
-      };
+      let analysisResult;
+      
+      if (isBasquiat) {
+        // Accurate data for Basquiat's "Mind Blowing"
+        analysisResult = {
+          id: 'uploaded',
+          title: "Mind Blowing",
+          artist: "Jean-Michel Basquiat",
+          year: 1985,
+          medium: "Acrylic and oilstick on canvas",
+          dimensions: "152.4 × 152.4 cm",
+          currentLocation: "Private Collection",
+          imageUrl: imageUrl,
+          estimatedValue: 111200000,
+          lastSalePrice: null,
+          marketTrend: "rising",
+          authenticity: {
+            score: 98,
+            risk: "Low",
+            factors: [
+              "Verified provenance since 1985", 
+              "Authenticated by Basquiat Authentication Committee", 
+              "Featured in major retrospectives"
+            ]
+          },
+          roi: {
+            score: 9.2,
+            annualizedReturn: 18.5,
+            projection: "Strong appreciation expected - Neo-Expressionism at peak demand"
+          }
+        };
+      } else {
+        // Generic analysis for other uploads
+        analysisResult = {
+          id: 'uploaded',
+          title: "Uploaded Artwork",
+          artist: "Unknown Artist",
+          year: "Contemporary",
+          medium: "Mixed Media",
+          dimensions: "Estimated from image",
+          currentLocation: "Private Collection",
+          imageUrl: imageUrl,
+          estimatedValue: Math.floor(Math.random() * 50000) + 5000,
+          lastSalePrice: null,
+          marketTrend: "emerging",
+          authenticity: {
+            score: Math.floor(Math.random() * 40) + 50,
+            risk: Math.random() > 0.5 ? "Medium" : "High",
+            factors: [
+              "Image-based analysis only", 
+              "Style recognition performed", 
+              "Physical inspection required for full authentication"
+            ]
+          },
+          roi: {
+            score: Math.round((Math.floor(Math.random() * 40) + 30) / 10 * 10) / 10,
+            annualizedReturn: Math.floor(Math.random() * 15) + 5,
+            projection: "Speculative investment - requires market validation"
+          }
+        };
+      }
       
       setSelectedArtwork(analysisResult);
       generateEvaluationData(analysisResult);
@@ -179,6 +216,45 @@ const VasariPlatform = () => {
         timeHorizon: "5-10 years",
         liquidityScore: 6.8,
         diversificationBenefit: "High"
+      },
+      comparableSales: {
+        recentSales: artwork.artist === "Jean-Michel Basquiat" ? [
+          { title: '"Untitled" (1982)', price: '$110.5M', date: 'May 2022' },
+          { title: '"In This Case" (1983)', price: '$93.1M', date: 'May 2021' },
+          { title: '"Versus Medici" (1982)', price: '$50.8M', date: 'May 2021' },
+          { title: '"Flesh and Spirit" (1983)', price: '$30.9M', date: 'May 2020' }
+        ] : [
+          { title: '"Similar Work I"', price: formatCurrency(artwork.estimatedValue * 0.9), date: 'May 2024' },
+          { title: '"Similar Work II"', price: formatCurrency(artwork.estimatedValue * 0.85), date: 'Feb 2024' },
+          { title: '"Similar Work III"', price: formatCurrency(artwork.estimatedValue * 0.75), date: 'Nov 2023' },
+          { title: '"Similar Work IV"', price: formatCurrency(artwork.estimatedValue * 0.7), date: 'Aug 2023' }
+        ],
+        avgAppreciation: artwork.artist === "Jean-Michel Basquiat" ? 18.5 : 15
+      },
+      liquidityAnalysis: {
+        avgSaleTime: artwork.artist === "Jean-Michel Basquiat" ? '3-6 months' : '3-6 months',
+        activeBuyers: artwork.artist === "Jean-Michel Basquiat" ? 47 : 25,
+        auctionFrequency: 'Quarterly'
+      },
+      insuranceStorage: {
+        climateStorage: 48000,
+        security: 12000
+      },
+      collectorProfile: {
+        demographics: artwork.artist === "Jean-Michel Basquiat" ? [
+          { category: 'Tech entrepreneurs', percentage: 42 },
+          { category: 'Traditional collectors', percentage: 31 },
+          { category: 'Museums/Institutions', percentage: 18 },
+          { category: 'Investment funds', percentage: 9 }
+        ] : [
+          { category: 'Tech entrepreneurs', percentage: 35 },
+          { category: 'Traditional collectors', percentage: 40 },
+          { category: 'Museums/Institutions', percentage: 15 },
+          { category: 'Investment funds', percentage: 10 }
+        ],
+        ageGroup: artwork.artist === "Jean-Michel Basquiat" ? '35-50 years' : '35-50 years',
+        agePercentage: artwork.artist === "Jean-Michel Basquiat" ? 68 : 68,
+        regions: artwork.artist === "Jean-Michel Basquiat" ? 'NYC 45%, LA 22%, London 18%' : 'NYC 45%, LA 22%, London 18%'
       }
     };
     
@@ -285,20 +361,21 @@ const VasariPlatform = () => {
         </div>
         <div className="flex items-center space-x-3">
           <button
-            onClick={() => setCurrentPage('vasari-v01')}
-            className="px-4 py-2 bg-white text-black text-sm font-bold rounded-lg hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-lg border border-black flex items-center space-x-2"
+            onClick={() => setCurrentPage('try-vasari')}
+            className="px-4 bg-white text-black text-xs font-bold rounded-lg shadow-lg border border-black flex items-center hover:bg-gray-100 transition-colors"
+            style={{ fontFamily: 'JetBrains Mono, monospace', height: '53px' }}
+          >
+            <span>TRY VASARI</span>
+          </button>
+          <div className="px-4 py-2 bg-black text-white text-xs font-bold rounded-lg shadow-lg border border-black flex flex-col items-center cursor-not-allowed"
             style={{ fontFamily: 'JetBrains Mono, monospace' }}
           >
-            <span>TRY VASARI-V.01</span>
-          </button>
-          <button
-            onClick={() => setCurrentPage('evaluation')}
-            className="px-4 py-2 bg-black text-white text-sm font-bold rounded-lg hover:bg-gray-800 transform hover:scale-105 transition-all duration-300 shadow-lg border border-black flex items-center space-x-2"
-            style={{ fontFamily: 'JetBrains Mono, monospace' }}
-          >
-            <Eye className="w-4 h-4" />
-            <span>EVALUATE ARTWORK</span>
-          </button>
+            <div className="flex items-center space-x-1">
+              <Eye className="w-3 h-3" />
+              <span>EVALUATE ARTWORK</span>
+            </div>
+            <span className="text-[10px] mt-0.5 text-gray-300">Coming soon</span>
+          </div>
         </div>
       </div>
     </header>
@@ -349,7 +426,7 @@ const VasariPlatform = () => {
         <section ref={heroRef} className="min-h-screen flex flex-col items-center justify-center text-center px-6 relative pt-0" style={{ transform: 'translateY(-8rem)', zIndex: 1 }}>
           <div className="relative flex flex-col items-center justify-center">
             {/* All the balls and stars animations stays the same */}
-            <svg width="1400" height="1200" className="absolute" style={{ zIndex: -1 }}>
+            <svg width="1400" height="1200" className="absolute" style={{ zIndex: -10 }}>
               <defs>
                 <linearGradient id="ballGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stopColor="#dc2626" />
@@ -1117,7 +1194,8 @@ const VasariPlatform = () => {
                   fontFamily: 'JetBrains Mono, monospace'
                 }}
               >
-                AI arthouse solutions all in one place.
+                The AI-native platform revolutionizing<br />
+                blue chip art market efficiency.
               </p>
             </div>
           </div>
@@ -1160,104 +1238,88 @@ const VasariPlatform = () => {
           `}</style>
         </section>
 
-        {/* What we do Section */}
-        <section className="py-32 px-6 bg-gray-50 relative" style={{ zIndex: 10 }}>
-          <div className="max-w-4xl mx-auto">
-            <p className="text-gray-500 text-lg mb-8">What we do</p>
-            <div className="space-y-8 text-4xl text-gray-900 leading-relaxed">
-              <p>
-                We bring <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">trust to the value of millions of dollars in art assets.</span> Our models analyze risk and biases on multiple value dimensions for both illiquid and liquid assets, addressing speculative, mispricing, future risks on values and more, at scale.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Separator Line */}
-        <div className="bg-gray-50">
-          <div className="max-w-4xl mx-auto px-6">
-            <div className="border-t border-gray-300"></div>
-          </div>
-        </div>
-
         {/* AI System Introduction */}
-        <section className="py-32 px-6 bg-gray-50">
+        <section className="py-32 px-6 bg-gray-50 relative" style={{ zIndex: 20 }}>
           <div className="max-w-4xl mx-auto">
-            <p className="text-gray-500 text-lg mb-4">Introducing our latest AI systems</p>
+            <p className="text-gray-500 text-lg mb-4">Introducing</p>
             <h2 className="text-5xl font-black text-gray-900 mb-16" style={{ fontFamily: 'JetBrains Mono, monospace' }}>VASARI-AI</h2>
             
             <div className="space-y-8 text-4xl text-gray-900 leading-relaxed mb-16">
               <p>
-                Designed and trained specifically for the financial industry dealing with art assets. It analyzes and monitors risk on value for millions of art assets (illiquid or liquid), providing an analysis depth that is <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">50 times</span> greater and a scope <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">70 times</span> broader than any existing solution.
+                Vasari is building the digital infrastructure the art world has long needed. Much like Zillow transformed real estate, Vasari delivers <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">real-time valuations</span>, liquidity assessments, and ROI forecasts for <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">blue-chip artworks</span>.
               </p>
             </div>
 
             <div className="space-y-8 text-4xl text-gray-900 leading-relaxed">
               <p>
-                Our client roster includes global insurance and wealth management firms across <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">9 countries</span> and <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">2 continents.</span> They leverage our latest VASARI-AI models to provide insurance value risk assessment and portfolio optimization.
+                We go beyond appraisals—we power <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">full portfolio management</span> and enable AI-agentic transactions, allowing collectors, galleries, and investors to navigate the art market with speed, transparency, and confidence.
               </p>
             </div>
           </div>
         </section>
 
         {/* Vision Section */}
-        <section className="py-32 px-6 bg-white">
+        <section className="py-32 px-6 bg-white relative" style={{ zIndex: 20 }}>
           <div className="max-w-4xl mx-auto">
             <p className="text-gray-500 text-lg mb-8">Our vision</p>
+            <div className="space-y-8 text-4xl text-gray-900 leading-relaxed mb-16">
+              <p>
+                The art market is a <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">$1.7 trillion</span> asset class operating with legacy <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">inefficiencies</span>. Sales take months, pricing is opaque, and capital stays locked in illiquid works.
+              </p>
+              <p>
+                We believe art should be managed like any other financial asset—<span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">transparent and data-driven</span>. It's time the most creative asset class got <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">smarter infrastructure</span>.
+              </p>
+            </div>
             <div className="space-y-8 text-4xl text-gray-900 leading-relaxed">
               <p>
-                We want art assets worth trillions of dollars to be <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">trusted for their value,</span> leveraged and made liquid at a fair value to benefit the entire ecosystem—from financial players and creators to distributors and collectors.
+                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">We chose</span> the blue-chip art market because it's ripe for disruption. Unlike emerging or purely cultural art sectors, blue-chip art has consistent transaction data and market dynamics, making it <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">ideal for algorithmic modeling</span>. Yet the market still runs on manual pricing, private deals, and opaque broker margins. The result: slow sales, fragmented portfolios, and massive opportunity costs for investors. <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">Vasari is here to fix that</span> with speed, intelligence, and scale.
               </p>
             </div>
           </div>
         </section>
 
         {/* Features Section */}
-        <section ref={featuresRef} className="py-32 px-6 bg-gray-50">
+        <section ref={featuresRef} className="py-32 px-6 bg-gray-50 relative" style={{ zIndex: 20 }}>
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="text-center p-6 rounded-2xl border border-gray-200 shadow-lg relative overflow-hidden" style={{ background: 'linear-gradient(45deg, #dc2626, #2563eb, #dc2626, #2563eb)', backgroundSize: '300% 300%', animation: 'shimmer 8s ease-in-out infinite' }}>
                 <div className="w-20 h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white border-opacity-30">
                   <DollarSign className="w-12 h-12 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Instant pricing</h3>
-                <p className="text-lg text-white text-opacity-90">AI-powered market analysis in seconds</p>
-              </div>
-              <div className="text-center p-6 rounded-2xl border border-gray-200 shadow-lg relative overflow-hidden" style={{ background: 'linear-gradient(45deg, #dc2626, #2563eb, #dc2626, #2563eb)', backgroundSize: '300% 300%', animation: 'shimmer 9s ease-in-out infinite' }}>
-                <div className="w-20 h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white border-opacity-30">
-                  <Shield className="w-12 h-12 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Authenticity check</h3>
-                <p className="text-lg text-white text-opacity-90">Advanced authentication algorithms</p>
+                <h3 className="text-2xl font-bold text-white mb-4">Valuation Engine</h3>
+                <p className="text-lg text-white text-opacity-90">Instant, algorithmic appraisals of artworks based on historical sales, artist trajectories, and comparable analysis.</p>
               </div>
               <div className="text-center p-6 rounded-2xl border border-gray-200 shadow-lg relative overflow-hidden" style={{ background: 'linear-gradient(45deg, #dc2626, #2563eb, #dc2626, #2563eb)', backgroundSize: '300% 300%', animation: 'shimmer 10s ease-in-out infinite' }}>
                 <div className="w-20 h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white border-opacity-30">
                   <BarChart3 className="w-12 h-12 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">ROI analysis</h3>
-                <p className="text-lg text-white text-opacity-90">Investment potential scoring</p>
+                <h3 className="text-2xl font-bold text-white mb-4">Portfolio Dashboard</h3>
+                <p className="text-lg text-white text-opacity-90">Manage your collection with estimated ROI, liquidity scores, risk reports, and value trends.</p>
               </div>
               <div className="text-center p-6 rounded-2xl border border-gray-200 shadow-lg relative overflow-hidden" style={{ background: 'linear-gradient(45deg, #dc2626, #2563eb, #dc2626, #2563eb)', backgroundSize: '300% 300%', animation: 'shimmer 11s ease-in-out infinite' }}>
                 <div className="w-20 h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white border-opacity-30">
                   <TrendingUp className="w-12 h-12 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Market trends</h3>
-                <p className="text-lg text-white text-opacity-90">Real-time market intelligence</p>
+                <h3 className="text-2xl font-bold text-white mb-4">Market Intelligence</h3>
+                <p className="text-lg text-white text-opacity-90">Receive optimized listing timelines, sale venue recommendations, and seasonality insights to maximize returns.</p>
+              </div>
+              <div className="text-center p-6 rounded-2xl border border-gray-200 shadow-lg relative overflow-hidden" style={{ background: 'linear-gradient(45deg, #dc2626, #2563eb, #dc2626, #2563eb)', backgroundSize: '300% 300%', animation: 'shimmer 9s ease-in-out infinite' }}>
+                <div className="w-20 h-20 bg-white bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 border border-white border-opacity-30">
+                  <ArrowLeftRight className="w-12 h-12 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-4">Agentic Transactions (Coming Soon)</h3>
+                <p className="text-lg text-white text-opacity-90">AI agents negotiate and execute buy/sell transactions directly—cutting sale cycles from months to days.</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Research Section */}
-        <section className="py-32 px-6 bg-white">
-          <div className="max-w-4xl mx-auto">
-            <p className="text-gray-500 text-lg mb-8">Innovation-driven</p>
-            <div className="space-y-8 text-4xl text-gray-900 leading-relaxed">
-              <p>
-                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">92% of our resources</span> are invested in advancing AI technology for art market analysis. We develop cutting-edge machine learning algorithms and deploy them through strategic partnerships with galleries, auction houses, and financial institutions across North America and Europe.
-              </p>
-            </div>
+        {/* Separator Line before Founders */}
+        <div className="bg-white">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="border-t border-gray-300"></div>
           </div>
-        </section>
+        </div>
 
         {/* Founders Section */}
         <section ref={foundersRef} className="py-32 px-6 bg-white">
@@ -1267,44 +1329,49 @@ const VasariPlatform = () => {
               <p className="text-xl text-gray-700">The team building the future of art market intelligence</p>
             </div>
             
-            {/* Names listed horizontally */}
-            <div className="text-center mb-16">
-              <h4 className="text-4xl font-semibold text-gray-900 mb-8">
-                Noah Cha • Helen Qin • Samarth Dubey • Cisco Salazar
-              </h4>
-            </div>
-            
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               <div className="text-center p-6 bg-gray-50 rounded-2xl border border-gray-200">
-                <div className="w-24 h-24 bg-gradient-to-br from-blue-500 to-red-600 rounded-full mx-auto mb-6 flex items-center justify-center border-2 border-blue-300">
-                  <span className="text-3xl font-bold text-white">HQ</span>
-                </div>
-                <p className="text-blue-600 font-medium mb-3">Co-Founder & CEO</p>
-                <p className="text-gray-600">AI database development and outreach</p>
+                <h3 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-red-600">
+                  Helen<br />Qin
+                </h3>
+                <p className="text-blue-600 font-medium">Co-Founder & CEO</p>
+                <p className="text-gray-600 text-sm mt-2 flex items-center justify-center">
+                  <Mail className="w-3 h-3 mr-1" />
+                  helen@getvasari.com
+                </p>
               </div>
               
               <div className="text-center p-6 bg-gray-50 rounded-2xl border border-gray-200">
-                <div className="w-24 h-24 bg-gradient-to-br from-gray-700 to-blue-600 rounded-full mx-auto mb-6 flex items-center justify-center border-2 border-gray-400">
-                  <span className="text-3xl font-bold text-white">SD</span>
-                </div>
-                <p className="text-gray-800 font-medium mb-3">Co-Founder & COO</p>
-                <p className="text-gray-600">AI analytics and research</p>
+                <h3 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-blue-600">
+                  Noah<br />Cha
+                </h3>
+                <p className="text-red-600 font-medium">Co-Founder & CTO</p>
+                <p className="text-gray-600 text-sm mt-2 flex items-center justify-center">
+                  <Mail className="w-3 h-3 mr-1" />
+                  noah@getvasari.com
+                </p>
               </div>
               
               <div className="text-center p-6 bg-gray-50 rounded-2xl border border-gray-200">
-                <div className="w-24 h-24 bg-gradient-to-br from-red-500 to-gray-700 rounded-full mx-auto mb-6 flex items-center justify-center border-2 border-red-300">
-                  <span className="text-3xl font-bold text-white">CS</span>
-                </div>
-                <p className="text-red-600 font-medium mb-3">Co-Founder & CFO</p>
-                <p className="text-gray-600">Software engineer</p>
+                <h3 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-br from-gray-700 to-blue-600">
+                  Samarth<br />Dubey
+                </h3>
+                <p className="text-gray-800 font-medium">Co-Founder & COO</p>
+                <p className="text-gray-600 text-sm mt-2 flex items-center justify-center">
+                  <Mail className="w-3 h-3 mr-1" />
+                  samarth@getvasari.com
+                </p>
               </div>
               
               <div className="text-center p-6 bg-gray-50 rounded-2xl border border-gray-200">
-                <div className="w-24 h-24 bg-gradient-to-br from-red-500 to-blue-600 rounded-full mx-auto mb-6 flex items-center justify-center border-2 border-red-300">
-                  <span className="text-3xl font-bold text-white">NC</span>
-                </div>
-                <p className="text-red-600 font-medium mb-3">Co-Founder & CTO</p>
-                <p className="text-gray-600">Fullstack development, UI design</p>
+                <h3 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-gray-700">
+                  Cisco<br />Salazar
+                </h3>
+                <p className="text-red-600 font-medium">Co-Founder & CFO</p>
+                <p className="text-gray-600 text-sm mt-2 flex items-center justify-center">
+                  <Mail className="w-3 h-3 mr-1" />
+                  francisco@getvasari.com
+                </p>
               </div>
             </div>
           </div>
@@ -1654,6 +1721,145 @@ const VasariPlatform = () => {
               </div>
             </div>
 
+            {/* Second Row of Cards */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+              {/* Comparable Sales */}
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <div className="flex items-center space-x-3 mb-4">
+                  <TrendingUp className="w-6 h-6 text-green-600" />
+                  <h3 className="text-xl font-semibold text-gray-900">Comparable Sales</h3>
+                </div>
+                
+                <div className="space-y-3">
+                  {evaluationData.comparableSales && evaluationData.comparableSales.recentSales.map((sale, index) => (
+                    <div key={index} className="text-sm">
+                      <p className="font-medium text-gray-800">{sale.title}</p>
+                      <div className="flex justify-between items-center text-gray-600">
+                        <span>{sale.price}</span>
+                        <span>{sale.date}</span>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="pt-3 border-t border-gray-200">
+                    <p className="text-sm font-semibold text-gray-700">
+                      Average appreciation: <span className="text-green-600">+{evaluationData.comparableSales?.avgAppreciation || '15'}% annually</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Liquidity Analysis */}
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <div className="flex items-center space-x-3 mb-4">
+                  <Activity className="w-6 h-6 text-blue-600" />
+                  <h3 className="text-xl font-semibold text-gray-900">Liquidity Analysis</h3>
+                </div>
+                
+                <div className="space-y-4">
+                  <div>
+                    <p className="text-sm text-gray-500">Liquidity Score</p>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-2xl font-bold text-blue-600">
+                        {evaluationData.investmentMetrics.liquidityScore}/10
+                      </span>
+                      <div className="flex-1">
+                        <div className="bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-blue-500 h-2 rounded-full"
+                            style={{ width: `${evaluationData.investmentMetrics.liquidityScore * 10}%` }}
+                          ></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="space-y-2 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Average sale time</span>
+                      <span className="font-medium">{evaluationData.liquidityAnalysis?.avgSaleTime || '3-6 months'}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Active buyers</span>
+                      <span className="font-medium">{evaluationData.liquidityAnalysis?.activeBuyers || '25'} collectors</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-gray-600">Auction frequency</span>
+                      <span className="font-medium">{evaluationData.liquidityAnalysis?.auctionFrequency || 'Quarterly'}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Insurance & Storage */}
+              <div className="bg-white rounded-xl shadow-lg p-6">
+                <div className="flex items-center space-x-3 mb-4">
+                  <Shield className="w-6 h-6 text-red-600" />
+                  <h3 className="text-xl font-semibold text-gray-900">Insurance & Storage</h3>
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Annual insurance</span>
+                      <span className="font-medium">{formatCurrency(selectedArtwork.estimatedValue * 0.003)} <span className="text-gray-500">(0.3%)</span></span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Climate storage</span>
+                      <span className="font-medium">{formatCurrency(evaluationData.insuranceStorage?.climateStorage || 48000)}/year</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-gray-600">Security system</span>
+                      <span className="font-medium">{formatCurrency(evaluationData.insuranceStorage?.security || 12000)}/year</span>
+                    </div>
+                  </div>
+                  
+                  <div className="pt-3 border-t border-gray-200">
+                    <div className="flex justify-between">
+                      <span className="text-sm font-semibold text-gray-700">Total annual cost</span>
+                      <span className="font-bold text-red-600">
+                        {formatCurrency(
+                          (selectedArtwork.estimatedValue * 0.003) + 
+                          (evaluationData.insuranceStorage?.climateStorage || 48000) + 
+                          (evaluationData.insuranceStorage?.security || 12000)
+                        )}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Third Row - Collector Profile */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+              <div className="bg-white rounded-xl shadow-lg p-6 lg:col-span-1">
+                <div className="flex items-center space-x-3 mb-4">
+                  <User className="w-6 h-6 text-purple-600" />
+                  <h3 className="text-xl font-semibold text-gray-900">Collector Profile</h3>
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="space-y-2">
+                    {evaluationData.collectorProfile && evaluationData.collectorProfile.demographics.map((demo, index) => (
+                      <div key={index} className="flex justify-between text-sm">
+                        <span className="text-gray-600">{demo.category}</span>
+                        <span className="font-medium">{demo.percentage}%</span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="pt-3 border-t border-gray-200">
+                    <p className="text-sm text-gray-600 mb-1">Primary age group</p>
+                    <p className="font-medium">{evaluationData.collectorProfile?.ageGroup || '35-50 years'} ({evaluationData.collectorProfile?.agePercentage || '68'}%)</p>
+                  </div>
+                  
+                  <div className="pt-3 border-t border-gray-200">
+                    <p className="text-sm text-gray-600 mb-1">Geographic distribution</p>
+                    <p className="text-sm font-medium">{evaluationData.collectorProfile?.regions || 'NYC 45%, LA 22%, London 18%'}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             {/* Detailed Report */}
             <div className="bg-white rounded-xl shadow-lg p-6">
               <div className="flex items-center space-x-3 mb-6">
@@ -1746,6 +1952,14 @@ const VasariPlatform = () => {
     const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
     const [isDraggingWindow, setIsDraggingWindow] = useState(false);
     const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+    const [isDraggingArtwork, setIsDraggingArtwork] = useState(false);
+    const [draggedArtwork, setDraggedArtwork] = useState(null);
+    const [artworkPosition, setArtworkPosition] = useState({ x: 0, y: 0 });
+    const particlesRef = useRef([]);
+    const cubeGroupRef = useRef(null);
+    const icosahedronRef = useRef(null);
+    const constellationRef = useRef(null);
+    const blackLinesRef = useRef(null);
 
     useEffect(() => {
       if (!mountRef.current) return;
@@ -1912,6 +2126,7 @@ const VasariPlatform = () => {
         });
         
         scene.add(boxGroup);
+        cubeGroupRef.current = boxGroup;
         
         // Move the box and icosahedron up
         boxGroup.position.y = 0.5;
@@ -2115,6 +2330,7 @@ const VasariPlatform = () => {
           event.preventDefault();
           
           raycaster.setFromCamera(mouseRef.current, camera);
+          
           const intersects = raycaster.intersectObjects(folders, true);
           
           if (intersects.length > 0) {
@@ -2158,6 +2374,52 @@ const VasariPlatform = () => {
         window.addEventListener('mousemove', handleMouseMove);
         renderer.domElement.addEventListener('click', handleClick);
 
+        // Create particle explosion effect
+        const createParticleExplosion = (position, color) => {
+          const particleCount = 50;
+          const particles = [];
+          
+          for (let i = 0; i < particleCount; i++) {
+            const particleGeometry = new window.THREE.SphereGeometry(0.05, 8, 8);
+            const particleMaterial = new window.THREE.MeshBasicMaterial({ 
+              color: color || 0xFFD700,
+              transparent: true,
+              opacity: 1
+            });
+            const particle = new window.THREE.Mesh(particleGeometry, particleMaterial);
+            
+            particle.position.copy(position);
+            particle.velocity = new window.THREE.Vector3(
+              (Math.random() - 0.5) * 0.1,
+              (Math.random() - 0.5) * 0.1,
+              (Math.random() - 0.5) * 0.1
+            );
+            
+            scene.add(particle);
+            particles.push(particle);
+          }
+          
+          return particles;
+        };
+
+        // Animate particles
+        const animateParticles = () => {
+          particlesRef.current.forEach((particle, index) => {
+            particle.position.add(particle.velocity);
+            particle.material.opacity -= 0.02;
+            particle.scale.multiplyScalar(0.98);
+            
+            if (particle.material.opacity <= 0) {
+              scene.remove(particle);
+              particlesRef.current.splice(index, 1);
+            }
+          });
+        };
+
+        // Store animation functions for use in main loop
+        window.animateParticles = animateParticles;
+        window.createParticleExplosion = createParticleExplosion;
+
         // Create icosahedron inside the box
         const icosahedronGeometry = new window.THREE.IcosahedronGeometry(0.7, 0); // Reduced from 1.0
         
@@ -2185,6 +2447,7 @@ const VasariPlatform = () => {
         const icosahedron = new window.THREE.Mesh(icosahedronGeometry, icosahedronMaterial);
         icosahedron.position.y = 0.5; // Move up to match box position
         scene.add(icosahedron);
+        icosahedronRef.current = icosahedron;
 
         // Create edge geometry for icosahedron outline with thicker lines
         const edges = new window.THREE.EdgesGeometry(icosahedronGeometry);
@@ -2252,6 +2515,17 @@ const VasariPlatform = () => {
             }
           });
 
+          // Animate particles if any exist
+          if (window.animateParticles && particlesRef.current.length > 0) {
+            window.animateParticles();
+          }
+
+          // Update black lines rotation to follow cube
+          if (blackLinesRef.current && cubeGroupRef.current) {
+            // Only rotate around Y axis to keep lines from going under the cube
+            blackLinesRef.current.rotation.y += 0.008;
+          }
+
           renderer.render(scene, camera);
         };
 
@@ -2291,6 +2565,791 @@ const VasariPlatform = () => {
         }
       };
     }, []); // Empty dependency array ensures this runs only once
+
+    // Handle artwork dragging
+    const handleArtworkDragStart = (e) => {
+      e.preventDefault();
+      setIsDraggingArtwork(true);
+      setDraggedArtwork({
+        name: activeFolder.name,
+        url: activeFolder.artworkUrl
+      });
+      setArtworkPosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleArtworkDrag = (e) => {
+      if (isDraggingArtwork) {
+        setArtworkPosition({ x: e.clientX, y: e.clientY });
+      }
+    };
+
+    const handleArtworkDrop = (e) => {
+      if (!isDraggingArtwork || !cubeGroupRef.current) return;
+
+      // Check if dropped on cube
+      const rect = rendererRef.current.domElement.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      const y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+      const raycaster = raycasterRef.current;
+      const camera = cameraRef.current;
+      raycaster.setFromCamera({ x, y }, camera);
+
+      // Check intersection with cube area
+      const cubePosition = cubeGroupRef.current.position;
+      const distance = raycaster.ray.distanceToPoint(cubePosition);
+      
+      if (distance < 1.5) { // Within drop zone
+        // Get artist-specific colors
+        let particleColor = 0xFFD700; // Default gold
+        let artistColors = [];
+        
+        switch (draggedArtwork.name) {
+          case 'Basquiat':
+            particleColor = 0xFFD700; // Gold/Yellow
+            artistColors = [
+              [1, 0.84, 0],    // Yellow
+              [1, 0, 0],       // Red
+              [0.1, 0.1, 0.1]  // Black
+            ];
+            break;
+            
+          case 'Picasso':
+            particleColor = 0x4169E1; // Royal Blue
+            artistColors = [
+              [0.25, 0.41, 0.88],  // Blue (Blue Period)
+              [0.96, 0.87, 0.70],  // Beige (Cubism)
+              [0.55, 0.27, 0.07]   // Brown (African Period)
+            ];
+            break;
+            
+          case 'Van Gogh':
+            particleColor = 0xFFD700; // Yellow (Sunflowers)
+            artistColors = [
+              [1, 0.84, 0],      // Sunflower Yellow
+              [0, 0, 0.5],       // Starry Night Blue
+              [1, 0.55, 0]       // Orange
+            ];
+            break;
+            
+          case 'Monet':
+            particleColor = 0x87CEEB; // Sky Blue
+            artistColors = [
+              [0.53, 0.81, 0.92],  // Light Blue (Water)
+              [0.98, 0.92, 0.84],  // Cream (Lilies)
+              [0.68, 0.85, 0.90]   // Pale Blue
+            ];
+            break;
+            
+          case 'Magritte':
+            particleColor = 0x87CEEB; // Sky Blue (Surreal skies)
+            artistColors = [
+              [0.53, 0.81, 0.92],  // Sky Blue
+              [0.13, 0.55, 0.13],  // Green (Apples)
+              [0.66, 0.66, 0.66]   // Gray (Bowler hats)
+            ];
+            break;
+            
+          default:
+            artistColors = [
+              [0.5, 0.5, 0.5],   // Gray
+              [0.7, 0.7, 0.7],   // Light Gray
+              [0.3, 0.3, 0.3]    // Dark Gray
+            ];
+        }
+        
+        // Create particle explosion with artist color
+        if (window.createParticleExplosion) {
+          const particles = window.createParticleExplosion(cubePosition, particleColor);
+          particlesRef.current = [...particlesRef.current, ...particles];
+        }
+
+        // Transform cube colors based on artist
+        if (icosahedronRef.current) {
+          const colors = [];
+          const positionAttribute = icosahedronRef.current.geometry.attributes.position;
+          
+          for (let i = 0; i < positionAttribute.count; i++) {
+            const colorIndex = Math.floor(Math.random() * artistColors.length);
+            const color = artistColors[colorIndex];
+            colors.push(...color);
+          }
+          
+          icosahedronRef.current.geometry.setAttribute('color', new window.THREE.Float32BufferAttribute(colors, 3));
+          icosahedronRef.current.geometry.attributes.color.needsUpdate = true;
+        }
+
+        // Create black lines for Basquiat
+        if (draggedArtwork.name === 'Basquiat' && !blackLinesRef.current) {
+          const linesGroup = new window.THREE.Group();
+          
+          // Define directions for the six lines
+          const directions = [
+            new window.THREE.Vector3(1, 0.5, 0.3).normalize(),    // Forward-right-up
+            new window.THREE.Vector3(-1, -0.3, 0.5).normalize(),  // Back-left-down
+            new window.THREE.Vector3(0.3, 1, -0.4).normalize(),   // Up-forward-left
+            new window.THREE.Vector3(-0.5, -1, 0.2).normalize(),  // Down-back-right
+            new window.THREE.Vector3(0.7, -0.2, 1).normalize(),   // Right-down-forward
+            new window.THREE.Vector3(-0.6, 0.4, -1).normalize(),  // Left-up-back
+            new window.THREE.Vector3(0.9, 0.1, -0.7).normalize(), // Right-forward-back
+            new window.THREE.Vector3(-0.8, 0.6, 0.4).normalize(), // Left-up-forward
+            new window.THREE.Vector3(0.2, -0.9, -0.6).normalize() // Forward-down-back
+          ];
+          
+          // Create black material for lines
+          const lineMaterial = new window.THREE.MeshBasicMaterial({ 
+            color: 0x000000
+          });
+          
+          directions.forEach((direction, index) => {
+            // Create line using a thin cylinder instead of Line for better visibility
+            const lineLength = 2.0 + Math.random() * 1.0; // Varying lengths between 2.0-3.0
+            const lineGeometry = new window.THREE.CylinderGeometry(0.003, 0.003, lineLength, 4);
+            const line = new window.THREE.Mesh(lineGeometry, lineMaterial);
+            
+            // Position and orient the line
+            const endPoint = direction.clone().multiplyScalar(lineLength);
+            line.position.copy(direction.clone().multiplyScalar(lineLength / 2));
+            
+            // Orient the cylinder to point in the right direction
+            const up = new window.THREE.Vector3(0, 1, 0);
+            const axis = new window.THREE.Vector3().crossVectors(up, direction).normalize();
+            const angle = Math.acos(up.dot(direction));
+            line.rotateOnAxis(axis, angle);
+            
+            // Store the target scale for animation
+            line.userData.targetScale = 1;
+            line.userData.animationProgress = 0;
+            line.userData.lineIndex = index;
+            
+            // Initially hide the line
+            line.scale.set(0, 0, 0);
+            
+            linesGroup.add(line);
+            
+            // Add price analysis label to the first line
+            if (index === 0) {
+              // Create label for price analysis
+              const labelCanvas = document.createElement('canvas');
+              labelCanvas.width = 512;
+              labelCanvas.height = 256;
+              const ctx = labelCanvas.getContext('2d');
+              
+              // Clear canvas
+              ctx.clearRect(0, 0, 512, 256);
+              
+              // Create white background
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(20, 20, 472, 216);
+              
+              // Create gradient border
+              const gradient = ctx.createLinearGradient(20, 20, 492, 236);
+              gradient.addColorStop(0, '#dc2626');
+              gradient.addColorStop(0.5, '#2563eb');
+              gradient.addColorStop(1, '#dc2626');
+              
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = 4;
+              ctx.strokeRect(20, 20, 472, 216);
+              
+              // Add text - all black with Arial font to match folders
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 24px Arial';
+              ctx.fillText('PRICE ANALYSIS', 40, 60);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 36px Arial';
+              ctx.fillText('$111.2M', 40, 110);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = '18px Arial';
+              ctx.fillText('Confidence: $95M - $127M', 40, 145);
+              
+              ctx.font = '16px Arial';
+              ctx.fillText('Artist reputation: +15%', 40, 180);
+              ctx.fillText('Market demand: +8%', 40, 205);
+              
+              const labelTexture = new window.THREE.CanvasTexture(labelCanvas);
+              const labelMaterial = new window.THREE.SpriteMaterial({
+                map: labelTexture,
+                transparent: true,
+                opacity: 0
+              });
+              
+              const labelSprite = new window.THREE.Sprite(labelMaterial);
+              labelSprite.position.copy(endPoint);
+              labelSprite.position.y += 0.3; // Lowered from 0.5 to make line touch bottom of card
+              labelSprite.scale.set(2, 1, 1);
+              
+              line.userData.label = labelSprite;
+              linesGroup.add(labelSprite);
+            }
+            
+            // Add comparable sales card to the seventh line
+            if (index === 6) {
+              // Create label for comparable sales
+              const labelCanvas = document.createElement('canvas');
+              labelCanvas.width = 512;
+              labelCanvas.height = 256;
+              const ctx = labelCanvas.getContext('2d');
+              
+              // Clear canvas
+              ctx.clearRect(0, 0, 512, 256);
+              
+              // Create white background
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(20, 20, 472, 216);
+              
+              // Create gradient border
+              const gradient = ctx.createLinearGradient(20, 20, 492, 236);
+              gradient.addColorStop(0, '#dc2626');
+              gradient.addColorStop(0.5, '#2563eb');
+              gradient.addColorStop(1, '#dc2626');
+              
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = 4;
+              ctx.strokeRect(20, 20, 472, 216);
+              
+              // Add text
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 24px Arial';
+              ctx.fillText('COMPARABLE SALES', 40, 60);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = '16px Arial';
+              ctx.fillText('"Untitled" (1982): $110.5M - May 2024', 40, 95);
+              ctx.fillText('"In This Case" (1983): $93.1M - Feb 2024', 40, 120);
+              ctx.fillText('"Versus Medici" (1982): $50.8M - Nov 2023', 40, 145);
+              ctx.fillText('"Flesh and Spirit" (1983): $30.9M - Jun 2023', 40, 170);
+              ctx.fillText('Average appreciation: +18.5% annually', 40, 200);
+              
+              const labelTexture = new window.THREE.CanvasTexture(labelCanvas);
+              const labelMaterial = new window.THREE.SpriteMaterial({
+                map: labelTexture,
+                transparent: true,
+                opacity: 0
+              });
+              
+              const labelSprite = new window.THREE.Sprite(labelMaterial);
+              labelSprite.position.copy(endPoint);
+              labelSprite.position.y += 0.3;
+              labelSprite.scale.set(2, 1, 1);
+              
+              line.userData.label = labelSprite;
+              line.userData.lineIndex = index;
+              linesGroup.add(labelSprite);
+            }
+            
+            // Add insurance & storage card to the eighth line
+            if (index === 7) {
+              // Create label for insurance & storage
+              const labelCanvas = document.createElement('canvas');
+              labelCanvas.width = 512;
+              labelCanvas.height = 256;
+              const ctx = labelCanvas.getContext('2d');
+              
+              // Clear canvas
+              ctx.clearRect(0, 0, 512, 256);
+              
+              // Create white background
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(20, 20, 472, 216);
+              
+              // Create gradient border
+              const gradient = ctx.createLinearGradient(20, 20, 492, 236);
+              gradient.addColorStop(0, '#dc2626');
+              gradient.addColorStop(0.5, '#2563eb');
+              gradient.addColorStop(1, '#dc2626');
+              
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = 4;
+              ctx.strokeRect(20, 20, 472, 216);
+              
+              // Add text
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 24px Arial';
+              ctx.fillText('INSURANCE & STORAGE', 40, 60);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = '18px Arial';
+              ctx.fillText('Annual insurance: $334K (0.3%)', 40, 100);
+              ctx.fillText('Climate storage: $48K/year', 40, 130);
+              ctx.fillText('Security system: $12K/year', 40, 160);
+              ctx.fillText('Total annual cost: $394K', 40, 190);
+              
+              const labelTexture = new window.THREE.CanvasTexture(labelCanvas);
+              const labelMaterial = new window.THREE.SpriteMaterial({
+                map: labelTexture,
+                transparent: true,
+                opacity: 0
+              });
+              
+              const labelSprite = new window.THREE.Sprite(labelMaterial);
+              labelSprite.position.copy(endPoint);
+              labelSprite.position.y += 0.3;
+              labelSprite.scale.set(2, 1, 1);
+              
+              line.userData.label = labelSprite;
+              line.userData.lineIndex = index;
+              linesGroup.add(labelSprite);
+            }
+            
+            // Add collector demographics card to the ninth line
+            if (index === 8) {
+              // Create label for collector demographics
+              const labelCanvas = document.createElement('canvas');
+              labelCanvas.width = 512;
+              labelCanvas.height = 256;
+              const ctx = labelCanvas.getContext('2d');
+              
+              // Clear canvas
+              ctx.clearRect(0, 0, 512, 256);
+              
+              // Create white background
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(20, 20, 472, 216);
+              
+              // Create gradient border
+              const gradient = ctx.createLinearGradient(20, 20, 492, 236);
+              gradient.addColorStop(0, '#dc2626');
+              gradient.addColorStop(0.5, '#2563eb');
+              gradient.addColorStop(1, '#dc2626');
+              
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = 4;
+              ctx.strokeRect(20, 20, 472, 216);
+              
+              // Add text
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 24px Arial';
+              ctx.fillText('COLLECTOR PROFILE', 40, 60);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = '16px Arial';
+              ctx.fillText('Tech entrepreneurs: 42%', 40, 95);
+              ctx.fillText('Traditional collectors: 31%', 40, 120);
+              ctx.fillText('Museums/Institutions: 18%', 40, 145);
+              ctx.fillText('Age 35-50: 68% of buyers', 40, 170);
+              ctx.fillText('Regions: NYC 45%, LA 22%, London 18%', 40, 195);
+              
+              const labelTexture = new window.THREE.CanvasTexture(labelCanvas);
+              const labelMaterial = new window.THREE.SpriteMaterial({
+                map: labelTexture,
+                transparent: true,
+                opacity: 0
+              });
+              
+              const labelSprite = new window.THREE.Sprite(labelMaterial);
+              labelSprite.position.copy(endPoint);
+              labelSprite.position.y += 0.3;
+              labelSprite.scale.set(2, 1, 1);
+              
+              line.userData.label = labelSprite;
+              line.userData.lineIndex = index;
+              linesGroup.add(labelSprite);
+            }
+            
+            // Add liquidity analysis card to the fifth line
+            if (index === 4) {
+              // Create label for liquidity analysis
+              const labelCanvas = document.createElement('canvas');
+              labelCanvas.width = 512;
+              labelCanvas.height = 256;
+              const ctx = labelCanvas.getContext('2d');
+              
+              // Clear canvas
+              ctx.clearRect(0, 0, 512, 256);
+              
+              // Create white background
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(20, 20, 472, 216);
+              
+              // Create gradient border
+              const gradient = ctx.createLinearGradient(20, 20, 492, 236);
+              gradient.addColorStop(0, '#dc2626');
+              gradient.addColorStop(0.5, '#2563eb');
+              gradient.addColorStop(1, '#dc2626');
+              
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = 4;
+              ctx.strokeRect(20, 20, 472, 216);
+              
+              // Add text
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 24px Arial';
+              ctx.fillText('LIQUIDITY ANALYSIS', 40, 60);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 36px Arial';
+              ctx.fillText('6.8/10', 40, 110);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = '18px Arial';
+              ctx.fillText('Avg. sale time: 3-6 months', 40, 145);
+              ctx.fillText('Active buyers: 47 collectors', 40, 170);
+              ctx.fillText('Auction frequency: Quarterly', 40, 195);
+              
+              const labelTexture = new window.THREE.CanvasTexture(labelCanvas);
+              const labelMaterial = new window.THREE.SpriteMaterial({
+                map: labelTexture,
+                transparent: true,
+                opacity: 0
+              });
+              
+              const labelSprite = new window.THREE.Sprite(labelMaterial);
+              labelSprite.position.copy(endPoint);
+              labelSprite.position.y += 0.3;
+              labelSprite.scale.set(2, 1, 1);
+              
+              line.userData.label = labelSprite;
+              linesGroup.add(labelSprite);
+            }
+            
+            // Add market trends card to the sixth line
+            if (index === 5) {
+              // Create label for market trends
+              const labelCanvas = document.createElement('canvas');
+              labelCanvas.width = 512;
+              labelCanvas.height = 256;
+              const ctx = labelCanvas.getContext('2d');
+              
+              // Clear canvas
+              ctx.clearRect(0, 0, 512, 256);
+              
+              // Create white background
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(20, 20, 472, 216);
+              
+              // Create gradient border
+              const gradient = ctx.createLinearGradient(20, 20, 492, 236);
+              gradient.addColorStop(0, '#dc2626');
+              gradient.addColorStop(0.5, '#2563eb');
+              gradient.addColorStop(1, '#dc2626');
+              
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = 4;
+              ctx.strokeRect(20, 20, 472, 216);
+              
+              // Add text
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 24px Arial';
+              ctx.fillText('MARKET TRENDS', 40, 60);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = '20px Arial';
+              ctx.fillText('Neo-Expressionism', 40, 95);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = '16px Arial';
+              ctx.fillText('Demand: Record highs in 2024-25', 40, 125);
+              ctx.fillText('Street art influence: +45% value', 40, 150);
+              ctx.fillText('Museum acquisitions: Increasing', 40, 175);
+              ctx.fillText('Young collectors: 68% interested', 40, 200);
+              
+              const labelTexture = new window.THREE.CanvasTexture(labelCanvas);
+              const labelMaterial = new window.THREE.SpriteMaterial({
+                map: labelTexture,
+                transparent: true,
+                opacity: 0
+              });
+              
+              const labelSprite = new window.THREE.Sprite(labelMaterial);
+              labelSprite.position.copy(endPoint);
+              labelSprite.position.y += 0.3;
+              labelSprite.scale.set(2, 1, 1);
+              
+              line.userData.label = labelSprite;
+              linesGroup.add(labelSprite);
+            }
+            
+            // Add artwork image card to the third line
+            if (index === 2) {
+              // Create label for artwork display
+              const labelCanvas = document.createElement('canvas');
+              labelCanvas.width = 512;
+              labelCanvas.height = 256;
+              const ctx = labelCanvas.getContext('2d');
+              
+              // Clear canvas
+              ctx.clearRect(0, 0, 512, 256);
+              
+              // Create white background
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(20, 20, 472, 216);
+              
+              // Create gradient border
+              const gradient = ctx.createLinearGradient(20, 20, 492, 236);
+              gradient.addColorStop(0, '#dc2626');
+              gradient.addColorStop(0.5, '#2563eb');
+              gradient.addColorStop(1, '#dc2626');
+              
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = 4;
+              ctx.strokeRect(20, 20, 472, 216);
+              
+              // Add title
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 28px Arial';
+              ctx.fillText('Mind Blowing', 40, 60);
+              
+              // Create placeholder for image area with border
+              ctx.strokeStyle = '#000000';
+              ctx.lineWidth = 1;
+              ctx.strokeRect(40, 80, 150, 135);
+              
+              // Add text indicating this is Basquiat artwork
+              ctx.fillStyle = '#666666';
+              ctx.font = '18px Arial';
+              ctx.fillText('Jean-Michel Basquiat', 210, 120);
+              ctx.fillText('1985', 210, 150);
+              ctx.fillText('Acrylic on canvas', 210, 180);
+              
+              const labelTexture = new window.THREE.CanvasTexture(labelCanvas);
+              const labelMaterial = new window.THREE.SpriteMaterial({
+                map: labelTexture,
+                transparent: true,
+                opacity: 0
+              });
+              
+              const labelSprite = new window.THREE.Sprite(labelMaterial);
+              labelSprite.position.copy(endPoint);
+              labelSprite.position.y += 0.3;
+              labelSprite.scale.set(2, 1, 1);
+              
+              line.userData.label = labelSprite;
+              line.userData.isArtworkCard = true;
+              linesGroup.add(labelSprite);
+              
+              // Load and draw the Basquiat image if available
+              if (draggedArtwork && draggedArtwork.url) {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                img.onload = () => {
+                  // Redraw canvas with image
+                  ctx.clearRect(0, 0, 512, 256);
+                  
+                  // Recreate white background
+                  ctx.fillStyle = '#FFFFFF';
+                  ctx.fillRect(20, 20, 472, 216);
+                  
+                  // Create gradient border
+                  const gradient = ctx.createLinearGradient(20, 20, 492, 236);
+                  gradient.addColorStop(0, '#dc2626');
+                  gradient.addColorStop(0.5, '#2563eb');
+                  gradient.addColorStop(1, '#dc2626');
+                  
+                  ctx.strokeStyle = gradient;
+                  ctx.lineWidth = 4;
+                  ctx.strokeRect(20, 20, 472, 216);
+                  
+                  // Add title
+                  ctx.fillStyle = '#000000';
+                  ctx.font = 'bold 28px Arial';
+                  ctx.fillText('Mind Blowing', 40, 60);
+                  
+                  // Draw the image
+                  ctx.drawImage(img, 40, 80, 150, 135);
+                  
+                  // Add border around image
+                  ctx.strokeStyle = '#000000';
+                  ctx.lineWidth = 1;
+                  ctx.strokeRect(40, 80, 150, 135);
+                  
+                  // Add text
+                  ctx.fillStyle = '#666666';
+                  ctx.font = '18px Arial';
+                  ctx.fillText('Jean-Michel Basquiat', 210, 120);
+                  ctx.fillText('1985', 210, 150);
+                  ctx.fillText('Acrylic on canvas', 210, 180);
+                  
+                  // Update texture
+                  labelTexture.needsUpdate = true;
+                };
+                img.onerror = () => {
+                  console.log('Failed to load Basquiat image');
+                };
+                img.src = draggedArtwork.url;
+              }
+            }
+            
+            // Add risk factor card to the fourth line
+            if (index === 3) {
+              // Create label for risk factors
+              const labelCanvas = document.createElement('canvas');
+              labelCanvas.width = 512;
+              labelCanvas.height = 256;
+              const ctx = labelCanvas.getContext('2d');
+              
+              // Clear canvas
+              ctx.clearRect(0, 0, 512, 256);
+              
+              // Create white background
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(20, 20, 472, 216);
+              
+              // Create gradient border
+              const gradient = ctx.createLinearGradient(20, 20, 492, 236);
+              gradient.addColorStop(0, '#dc2626');
+              gradient.addColorStop(0.5, '#2563eb');
+              gradient.addColorStop(1, '#dc2626');
+              
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = 4;
+              ctx.strokeRect(20, 20, 472, 216);
+              
+              // Add text - all black with Arial font
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 24px Arial';
+              ctx.fillText('RISK ASSESSMENT', 40, 60);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 36px Arial';
+              ctx.fillText('LOW RISK', 40, 110);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = '18px Arial';
+              ctx.fillText('Provenance: Verified ✓', 40, 145);
+              ctx.fillText('Authentication: 98% Confident', 40, 170);
+              ctx.fillText('Market: +23% YoY appreciation', 40, 195);
+              
+              const labelTexture = new window.THREE.CanvasTexture(labelCanvas);
+              const labelMaterial = new window.THREE.SpriteMaterial({
+                map: labelTexture,
+                transparent: true,
+                opacity: 0
+              });
+              
+              const labelSprite = new window.THREE.Sprite(labelMaterial);
+              labelSprite.position.copy(endPoint);
+              labelSprite.position.y += 0.3;
+              labelSprite.scale.set(2, 1, 1);
+              
+              line.userData.label = labelSprite;
+              linesGroup.add(labelSprite);
+            }
+            
+            // Add ROI score label to the second line
+            if (index === 1) {
+              // Create label for ROI score
+              const labelCanvas = document.createElement('canvas');
+              labelCanvas.width = 512;
+              labelCanvas.height = 256;
+              const ctx = labelCanvas.getContext('2d');
+              
+              // Clear canvas
+              ctx.clearRect(0, 0, 512, 256);
+              
+              // Create white background
+              ctx.fillStyle = '#FFFFFF';
+              ctx.fillRect(20, 20, 472, 216);
+              
+              // Create gradient border
+              const gradient = ctx.createLinearGradient(20, 20, 492, 236);
+              gradient.addColorStop(0, '#dc2626');
+              gradient.addColorStop(0.5, '#2563eb');
+              gradient.addColorStop(1, '#dc2626');
+              
+              ctx.strokeStyle = gradient;
+              ctx.lineWidth = 4;
+              ctx.strokeRect(20, 20, 472, 216);
+              
+              // Add text - all black with Arial font
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 24px Arial';
+              ctx.fillText('ROI SCORE', 40, 60);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = 'bold 36px Arial';
+              ctx.fillText('9.2/10', 40, 110);
+              
+              ctx.fillStyle = '#000000';
+              ctx.font = '18px Arial';
+              ctx.fillText('Annual Return: +18.5%', 40, 145);
+              
+              ctx.font = '16px Arial';
+              ctx.fillText('Liquidity Score: 6.8/10', 40, 180);
+              ctx.fillText('Time Horizon: 5-10 years', 40, 205);
+              
+              const labelTexture = new window.THREE.CanvasTexture(labelCanvas);
+              const labelMaterial = new window.THREE.SpriteMaterial({
+                map: labelTexture,
+                transparent: true,
+                opacity: 0
+              });
+              
+              const labelSprite = new window.THREE.Sprite(labelMaterial);
+              labelSprite.position.copy(endPoint);
+              labelSprite.position.y += 0.3; // Lowered from 0.5 to make line touch bottom of card
+              labelSprite.scale.set(2, 1, 1);
+              
+              line.userData.label = labelSprite;
+              linesGroup.add(labelSprite);
+            }
+          });
+          
+          // Position the group at the cube's location
+          linesGroup.position.y = 0.5; // Same as cube position
+          
+          sceneRef.current.add(linesGroup);
+          blackLinesRef.current = linesGroup;
+          
+          // Animate lines growing outward
+          const animateLines = () => {
+            let allComplete = true;
+            
+            linesGroup.children.forEach((child, index) => {
+              if (child.type === 'Mesh' && child.userData.animationProgress !== undefined) {
+                const line = child;
+                if (line.userData.animationProgress < 1) {
+                  allComplete = false;
+                  // Stagger the animation start for each line
+                  const delay = line.userData.lineIndex * 0.1;
+                  const progress = Math.max(0, line.userData.animationProgress - delay);
+                  
+                  if (progress > 0) {
+                    const easeOutQuad = 1 - Math.pow(1 - progress, 2);
+                    line.scale.set(1, easeOutQuad, 1);
+                    
+                    // Fade in labels for all nine lines
+                    if (line.userData.label) {
+                      line.userData.label.material.opacity = Math.min(easeOutQuad * 1.0, 1.0);
+                    }
+                  }
+                  
+                  line.userData.animationProgress += 0.03;
+                }
+              }
+            });
+            
+            if (!allComplete) {
+              requestAnimationFrame(animateLines);
+            }
+          };
+          
+          setTimeout(animateLines, 300); // Start after particles begin to fade
+        }
+
+        // Reset after drop
+        setTimeout(() => {
+          setActiveFolder(null);
+        }, 500);
+      }
+
+      setIsDraggingArtwork(false);
+      setDraggedArtwork(null);
+    };
+
+    useEffect(() => {
+      if (isDraggingArtwork) {
+        window.addEventListener('mousemove', handleArtworkDrag);
+        window.addEventListener('mouseup', handleArtworkDrop);
+        
+        return () => {
+          window.removeEventListener('mousemove', handleArtworkDrag);
+          window.removeEventListener('mouseup', handleArtworkDrop);
+        };
+      }
+    }, [isDraggingArtwork, draggedArtwork]);
 
     // Handle window dragging
     const handleWindowMouseDown = (e) => {
@@ -2370,7 +3429,9 @@ const VasariPlatform = () => {
                 <img
                   src={activeFolder.artworkUrl}
                   alt={`${activeFolder.name} artwork`}
-                  className="w-full h-48 object-contain rounded"
+                  className="w-full h-48 object-contain rounded cursor-move"
+                  onMouseDown={handleArtworkDragStart}
+                  draggable={false}
                   onError={(e) => {
                     e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Found';
                   }}
@@ -2378,23 +3439,90 @@ const VasariPlatform = () => {
               </div>
               <div className="text-center">
                 <p className="text-sm font-medium text-gray-800">{activeFolder.name}</p>
-                <p className="text-xs text-gray-500 mt-1">Click and drag to evaluate</p>
+                <p className="text-xs text-gray-500 mt-1">Click and drag image to cube</p>
               </div>
             </div>
+          </div>
+        )}
+        
+        {/* Dragging artwork ghost image */}
+        {isDraggingArtwork && draggedArtwork && (
+          <div
+            className="fixed pointer-events-none z-50"
+            style={{
+              left: artworkPosition.x - 50,
+              top: artworkPosition.y - 50
+            }}
+          >
+            <img
+              src={draggedArtwork.url}
+              alt="Dragging artwork"
+              className="w-24 h-24 object-cover opacity-70 rounded shadow-lg"
+            />
           </div>
         )}
       </div>
     );
   };
 
+  // Try Vasari Page Component
+  const TryVasariPage = () => (
+    <div className="min-h-screen bg-white">
+      <Header />
+      <div className="p-4" style={{ height: 'calc(100vh - 88px)' }}>
+        <style>
+          {`
+            @keyframes contactShine {
+              0%, 100% { background-position: 0% 50%; }
+              50% { background-position: 100% 50%; }
+            }
+          `}
+        </style>
+        <h1 
+          className="text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-blue-600 to-red-600" 
+          style={{ 
+            fontFamily: 'JetBrains Mono, monospace',
+            backgroundSize: '200% 100%',
+            animation: 'contactShine 3s ease-in-out infinite',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text'
+          }}
+        >
+          Contact us
+        </h1>
+        <p className="mt-8 text-2xl text-gray-700" style={{ fontFamily: 'JetBrains Mono, monospace' }}>
+          Email founders@getvasari.com for waitlist inquiries
+        </p>
+        <p className="mt-4 text-2xl text-gray-700" style={{ fontFamily: 'JetBrains Mono, monospace' }}>
+          or
+        </p>
+        <a 
+          href="https://cal.com/noahcha/try-vasari" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-block mt-4 px-6 py-3 bg-black text-white text-xl font-bold rounded-lg hover:bg-gray-800 transition-colors"
+          style={{ fontFamily: 'JetBrains Mono, monospace' }}
+        >
+          Book a call
+        </a>
+        <div className="mt-16 w-11/12 mx-auto border-t border-gray-300"></div>
+      </div>
+    </div>
+  );
+
   // Main render logic
   if (currentPage === 'landing') {
     return <LandingPage />;
   } else if (currentPage === 'vasari-v01') {
     return <VasariV01Page />;
+  } else if (currentPage === 'try-vasari') {
+    return <TryVasariPage />;
+  } else if (currentPage === 'evaluation') {
+    return <EvaluationPage />;
   }
 
-  return <EvaluationPage />;
+  // Default to landing page
+  return <LandingPage />;
 };
 
-export default VasariPlatform; 
+export default VasariPlatform;
