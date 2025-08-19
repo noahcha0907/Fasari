@@ -2,25 +2,47 @@
 
 Vasari is an AI-powered platform that provides comprehensive evaluation and analysis of artwork for pricing, authenticity verification, and investment potential assessment.
 
-## 🎨 Features
+## Project Structure
 
-- **Instant Pricing**: AI-powered market analysis in seconds
-- **Authenticity Check**: Advanced authentication algorithms
-- **ROI Analysis**: Investment potential scoring
-- **Market Trends**: Real-time market intelligence
-- **Image Upload**: Drag & drop artwork analysis
-- **Database Search**: Search through curated art collections
+- `/frontend` - React application
+- `/backend` - Python API and AI models
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-
 - Node.js (v16 or higher)
+- Python (3.9 or higher)
 - npm or yarn
 
 ### Installation
 
-1. Clone the repository:
+1. Clone the repository
+2. Install all dependencies: `npm run install:all`
+
+### Development
+
+Run both frontend and backend:
 ```bash
-git clone https://github.com/yourusername/vasari.git
-cd vasari
+npm run dev
+Or run them separately:
+
+Frontend only: npm run dev:frontend
+Backend only: npm run dev:backend
+Tech Stack
+Frontend
+
+React
+Tailwind CSS
+Three.js
+Lucide React Icons
+
+Backend
+
+FastAPI
+Python
+TensorFlow/PyTorch (AI models)
+PostgreSQL
+Redis
+
+License
+MIT License

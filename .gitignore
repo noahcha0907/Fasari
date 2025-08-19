@@ -85,3 +85,23 @@ logs
 # Temporary folders
 tmp/
 temp/
+# Python
+*.pyc
+__pycache__/
+.pytest_cache/
+venv/
+env/
+.env
+*.egg-info/
+
+# ML Models
+*.h5
+*.pkl
+*.pth
+backend/ai/models/*/weights/
+
+# Data
+backend/data/raw/
+backend/data/processed/
+*.db
+*.sqlite
