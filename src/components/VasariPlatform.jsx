@@ -287,99 +287,106 @@ const VasariPlatform = () => {
     }
   };
 
-  // Shared Header Component
-  const Header = () => (
-    <header className="px-6 py-6 bg-white border-b border-gray-200 relative z-20">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 border-2 rounded-lg relative" style={{ borderColor: '#000000', background: 'transparent' }}>
-            {/* Inner diamond in black and white */}
+// Updated Header Component with active buttons
+const Header = () => (
+  <header className="px-6 py-6 bg-white border-b border-gray-200 relative z-20">
+    <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="flex items-center space-x-3">
+        <div className="w-10 h-10 border-2 rounded-lg relative" style={{ borderColor: '#000000', background: 'transparent' }}>
+          {/* Inner diamond in black and white */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              transform: 'rotate(45deg) scale(0.7)',
+              top: '50%',
+              left: '50%',
+              transformOrigin: 'center',
+              marginTop: '-50%',
+              marginLeft: '-50%',
+              width: '100%',
+              height: '100%',
+              background: '#000000',
+              border: '1px solid #000000'
+            }}
+          >
+            {/* Mini square inside diamond in white */}
             <div 
-              className="absolute inset-0"
+              className="absolute inset-0 border-2 border-white"
               style={{
-                transform: 'rotate(45deg) scale(0.7)',
+                transform: 'rotate(45deg) scale(0.85)',
                 top: '50%',
                 left: '50%',
                 transformOrigin: 'center',
                 marginTop: '-50%',
                 marginLeft: '-50%',
                 width: '100%',
-                height: '100%',
-                background: '#000000',
-                border: '1px solid #000000'
+                height: '100%'
               }}
-            >
-              {/* Mini square inside diamond in white */}
-              <div 
-                className="absolute inset-0 border-2 border-white"
-                style={{
-                  transform: 'rotate(45deg) scale(0.85)',
-                  top: '50%',
-                  left: '50%',
-                  transformOrigin: 'center',
-                  marginTop: '-50%',
-                  marginLeft: '-50%',
-                  width: '100%',
-                  height: '100%'
-                }}
-              ></div>
-            </div>
+            ></div>
+          </div>
 
-            {/* Plus symbol in white */}
-            <div className="absolute inset-0 z-10 flex items-center justify-center">
-              {/* Horizontal line of plus */}
-              <div 
-                className="absolute bg-white"
-                style={{
-                  width: '100%',
-                  height: '2px',
-                  top: '50%',
-                  left: '0',
-                  transform: 'translateY(-50%)'
-                }}
-              ></div>
-              {/* Vertical line of plus */}
-              <div 
-                className="absolute bg-white"
-                style={{
-                  width: '2px',
-                  height: '100%',
-                  top: '0',
-                  left: '50%',
-                  transform: 'translateX(-50%)'
-                }}
-              ></div>
-            </div>
-          </div>
-          <span 
-            className="text-xl font-semibold text-black cursor-pointer" 
-            style={{ fontFamily: 'JetBrains Mono, monospace' }}
-            onClick={() => setCurrentPage('landing')}
-          >
-            Vasari
-          </span>
-        </div>
-        <div className="flex items-center space-x-3">
-          <button
-            onClick={() => setCurrentPage('try-vasari')}
-            className="px-4 bg-white text-black text-xs font-bold rounded-lg shadow-lg border border-black flex items-center hover:bg-gray-100 transition-colors"
-            style={{ fontFamily: 'JetBrains Mono, monospace', height: '53px' }}
-          >
-            <span>TRY VASARI</span>
-          </button>
-          <div className="px-4 py-2 bg-black text-white text-xs font-bold rounded-lg shadow-lg border border-black flex flex-col items-center cursor-not-allowed"
-            style={{ fontFamily: 'JetBrains Mono, monospace' }}
-          >
-            <div className="flex items-center space-x-1">
-              <Eye className="w-3 h-3" />
-              <span>EVALUATE ARTWORK</span>
-            </div>
-            <span className="text-[10px] mt-0.5 text-gray-300">Coming soon</span>
+          {/* Plus symbol in white */}
+          <div className="absolute inset-0 z-10 flex items-center justify-center">
+            {/* Horizontal line of plus */}
+            <div 
+              className="absolute bg-white"
+              style={{
+                width: '100%',
+                height: '2px',
+                top: '50%',
+                left: '0',
+                transform: 'translateY(-50%)'
+              }}
+            ></div>
+            {/* Vertical line of plus */}
+            <div 
+              className="absolute bg-white"
+              style={{
+                width: '2px',
+                height: '100%',
+                top: '0',
+                left: '50%',
+                transform: 'translateX(-50%)'
+              }}
+            ></div>
           </div>
         </div>
+        <span 
+          className="text-xl font-semibold text-black cursor-pointer" 
+          style={{ fontFamily: 'JetBrains Mono, monospace' }}
+          onClick={() => setCurrentPage('landing')}
+        >
+          Vasari
+        </span>
       </div>
-    </header>
-  );
+      <div className="flex items-center space-x-3">
+        <button
+          onClick={() => setCurrentPage('try-vasari')}
+          className="px-4 bg-white text-black text-xs font-bold rounded-lg shadow-lg border border-black flex items-center hover:bg-gray-100 transition-colors"
+          style={{ fontFamily: 'JetBrains Mono, monospace', height: '53px' }}
+        >
+          <span>TRY VASARI</span>
+        </button>
+        <button
+          onClick={() => setCurrentPage('evaluation')}
+          className="px-4 py-2 bg-black text-white text-xs font-bold rounded-lg shadow-lg border border-black flex items-center hover:bg-gray-800 transition-colors"
+          style={{ fontFamily: 'JetBrains Mono, monospace', height: '53px' }}
+        >
+          <Eye className="w-3 h-3 mr-1" />
+          <span>EVALUATE ARTWORK</span>
+        </button>
+        <button
+          onClick={() => setCurrentPage('portfolio')}
+          className="px-4 py-2 bg-black text-white text-xs font-bold rounded-lg shadow-lg border border-black flex items-center hover:bg-gray-800 transition-colors"
+          style={{ fontFamily: 'JetBrains Mono, monospace', height: '53px' }}
+        >
+          <BarChart3 className="w-3 h-3 mr-1" />
+          <span>MY PORTFOLIO</span>
+        </button>
+      </div>
+    </div>
+  </header>
+);
 
   // Intersection Observer Hook
   const useIntersectionObserver = (threshold = 0.3) => {
@@ -1329,7 +1336,7 @@ const VasariPlatform = () => {
               <p className="text-xl text-gray-700">The team building the future of art market intelligence</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
               <div className="text-center p-6 bg-gray-50 rounded-2xl border border-gray-200">
                 <h3 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-red-600">
                   Helen<br />Qin
@@ -1356,23 +1363,13 @@ const VasariPlatform = () => {
                 <h3 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-br from-gray-700 to-blue-600">
                   Samarth<br />Dubey
                 </h3>
-                <p className="text-gray-800 font-medium">Co-Founder & COO</p>
+                <p className="text-gray-800 font-medium">Co-Founder & CFO</p>
                 <p className="text-gray-600 text-sm mt-2 flex items-center justify-center">
                   <Mail className="w-3 h-3 mr-1" />
                   samarth@getvasari.com
                 </p>
               </div>
               
-              <div className="text-center p-6 bg-gray-50 rounded-2xl border border-gray-200">
-                <h3 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-br from-red-500 to-gray-700">
-                  Cisco<br />Salazar
-                </h3>
-                <p className="text-red-600 font-medium">Co-Founder & CFO</p>
-                <p className="text-gray-600 text-sm mt-2 flex items-center justify-center">
-                  <Mail className="w-3 h-3 mr-1" />
-                  francisco@getvasari.com
-                </p>
-              </div>
             </div>
           </div>
         </section>
@@ -3510,19 +3507,931 @@ const VasariPlatform = () => {
     </div>
   );
 
-  // Main render logic
-  if (currentPage === 'landing') {
-    return <LandingPage />;
-  } else if (currentPage === 'vasari-v01') {
-    return <VasariV01Page />;
-  } else if (currentPage === 'try-vasari') {
-    return <TryVasariPage />;
-  } else if (currentPage === 'evaluation') {
-    return <EvaluationPage />;
-  }
+// My Portfolio Page Component
+  const MyPortfolioPage = () => {
+    const [selectedTimeframe, setSelectedTimeframe] = useState('1Y');
+    const [portfolioView, setPortfolioView] = useState('grid');
+    const [showTableView, setShowTableView] = useState(false);
+    const [expandedSections, setExpandedSections] = useState({
+      contemporary: true,
+      surrealist: true,
+      modern: true
+    });
+    
+    // Mock portfolio data with actual artwork images
+    const portfolioData = {
+      totalValue: 298000000,
+      totalChange: 68000000,
+      changePercent: 29.6,
+      dayChange: 1850000,
+      dayChangePercent: 0.62,
+      yearChange: 68000000,
+      yearChangePercent: 29.6,
+      artworks: [
+        {
+          id: 1,
+          title: "Untitled",
+          artist: "Jean-Michel Basquiat",
+          year: 1982,
+          imageUrl: "/images/artworks/Basquiat.jpeg",
+          purchasePrice: 85000000,
+          currentValue: 110500000,
+          change: 25500000,
+          changePercent: 30.0,
+          status: "Hold",
+          riskLevel: "Low"
+        },
+        {
+          id: 2,
+          title: "The Empire of Light",
+          artist: "René Magritte",
+          year: 1954,
+          imageUrl: "/images/artworks/Magritte.png",
+          purchasePrice: 95000000,
+          currentValue: 121000000,
+          change: 26000000,
+          changePercent: 27.4,
+          status: "Hold",
+          riskLevel: "Low"
+        },
+        {
+          id: 3,
+          title: "Broadway Boogie-Woogie",
+          artist: "Piet Mondrian",
+          year: 1943,
+          imageUrl: "/images/artworks/Mondrian.jpeg",
+          purchasePrice: 38000000,
+          currentValue: 52000000,
+          change: 14000000,
+          changePercent: 36.8,
+          status: "Buy",
+          riskLevel: "Medium"
+        },
+        {
+          id: 4,
+          title: "La Femme",
+          artist: "Pablo Picasso",
+          year: 1953,
+          imageUrl: "/images/artworks/Picasso.webp",
+          purchasePrice: 12000000,
+          currentValue: 14500000,
+          change: 2500000,
+          changePercent: 20.8,
+          status: "Hold",
+          riskLevel: "Low"
+        }
+      ],
+      chartData: {
+        '1M': [
+          { date: 'May 10', value: 285000000 },
+          { date: 'May 12', value: 286500000 },
+          { date: 'May 14', value: 288000000 },
+          { date: 'May 16', value: 287500000 },
+          { date: 'May 18', value: 289000000 },
+          { date: 'May 20', value: 290500000 },
+          { date: 'May 22', value: 292000000 },
+          { date: 'May 24', value: 291500000 },
+          { date: 'May 26', value: 293000000 },
+          { date: 'May 28', value: 294500000 },
+          { date: 'May 30', value: 295000000 },
+          { date: 'Jun 01', value: 296000000 },
+          { date: 'Jun 03', value: 295500000 },
+          { date: 'Jun 05', value: 296500000 },
+          { date: 'Jun 07', value: 297000000 },
+          { date: 'Jun 09', value: 298000000 }
+        ],
+        '3M': [
+          { date: 'Mar 09', value: 265000000 },
+          { date: 'Mar 16', value: 267000000 },
+          { date: 'Mar 23', value: 268500000 },
+          { date: 'Mar 30', value: 270000000 },
+          { date: 'Apr 06', value: 271500000 },
+          { date: 'Apr 13', value: 273000000 },
+          { date: 'Apr 20', value: 274500000 },
+          { date: 'Apr 27', value: 276000000 },
+          { date: 'May 04', value: 277500000 },
+          { date: 'May 11', value: 279000000 },
+          { date: 'May 18', value: 280500000 },
+          { date: 'May 25', value: 283000000 },
+          { date: 'Jun 01', value: 285500000 },
+          { date: 'Jun 09', value: 287500000 }
+        ],
+        '6M': [
+          { date: 'Dec 09', value: 245000000 },
+          { date: 'Dec 23', value: 248000000 },
+          { date: 'Jan 06', value: 252000000 },
+          { date: 'Jan 20', value: 255000000 },
+          { date: 'Feb 03', value: 258000000 },
+          { date: 'Feb 17', value: 261000000 },
+          { date: 'Mar 03', value: 264000000 },
+          { date: 'Mar 17', value: 268000000 },
+          { date: 'Mar 31', value: 271000000 },
+          { date: 'Apr 14', value: 274000000 },
+          { date: 'Apr 28', value: 277000000 },
+          { date: 'May 12', value: 280000000 },
+          { date: 'May 26', value: 284000000 },
+          { date: 'Jun 09', value: 287500000 }
+        ],
+        'YTD': [
+          { date: 'Jan 01', value: 255000000 },
+          { date: 'Jan 15', value: 257000000 },
+          { date: 'Jan 31', value: 260000000 },
+          { date: 'Feb 14', value: 263000000 },
+          { date: 'Feb 28', value: 265000000 },
+          { date: 'Mar 15', value: 268000000 },
+          { date: 'Mar 31', value: 271000000 },
+          { date: 'Apr 15', value: 274000000 },
+          { date: 'Apr 30', value: 277000000 },
+          { date: 'May 15', value: 281000000 },
+          { date: 'May 31', value: 285000000 },
+          { date: 'Jun 09', value: 287500000 }
+        ],
+        '1Y': [
+          { date: 'Jul \'24', value: 230000000 },
+          { date: 'Aug \'24', value: 238000000 },
+          { date: 'Sep \'24', value: 245000000 },
+          { date: 'Oct \'24', value: 252000000 },
+          { date: 'Nov \'24', value: 260000000 },
+          { date: 'Dec \'24', value: 268000000 },
+          { date: 'Jan \'25', value: 275000000 },
+          { date: 'Feb \'25', value: 282000000 },
+          { date: 'Mar \'25', value: 288000000 },
+          { date: 'Apr \'25', value: 293000000 },
+          { date: 'May \'25', value: 296000000 },
+          { date: 'Jun \'25', value: 298000000 }
+        ],
+        '2Y': [
+          { date: 'Jun \'23', value: 220000000 },
+          { date: 'Sep \'23', value: 228000000 },
+          { date: 'Dec \'23', value: 235000000 },
+          { date: 'Mar \'24', value: 242000000 },
+          { date: 'Jun \'24', value: 250000000 },
+          { date: 'Sep \'24', value: 260000000 },
+          { date: 'Dec \'24', value: 268000000 },
+          { date: 'Mar \'25', value: 277000000 },
+          { date: 'Jun \'25', value: 287500000 }
+        ]
+      },
+      performanceData: {
+        '1M': [
+          { date: 'Week 1', value: 275000000 },
+          { date: 'Week 2', value: 278000000 },
+          { date: 'Week 3', value: 282000000 },
+          { date: 'Week 4', value: 287500000 }
+        ],
+        '3M': [
+          { date: 'Month 1', value: 265000000 },
+          { date: 'Month 2', value: 275000000 },
+          { date: 'Month 3', value: 287500000 }
+        ],
+        '1Y': [
+          { date: 'Q1', value: 255000000 },
+          { date: 'Q2', value: 265000000 },
+          { date: 'Q3', value: 275000000 },
+          { date: 'Q4', value: 287500000 }
+        ]
+      },
+      diversification: [
+        { category: 'Contemporary', value: 40, amount: 119200000 },
+        { category: 'Surrealist', value: 35, amount: 104300000 },
+        { category: 'Modern/Abstract', value: 25, amount: 74500000 }
+      ],
+      riskMetrics: {
+        volatilityScore: 6.8,
+        liquidityScore: 7.5,
+        diversificationScore: 8.8
+      }
+    };
 
-  // Default to landing page
+    const getStatusColor = (status) => {
+      switch (status) {
+        case 'Buy': return 'text-green-600 bg-green-50';
+        case 'Hold': return 'text-blue-600 bg-blue-50';
+        case 'Sell': return 'text-red-600 bg-red-50';
+        default: return 'text-gray-600 bg-gray-50';
+      }
+    };
+
+    // Function to create chart path
+    const createChartPath = (data) => {
+      if (!data || data.length === 0) return '';
+      
+      const width = 1200;
+      const height = 300;
+      const padding = 20;
+      
+      const minValue = Math.min(...data.map(d => d.value));
+      const maxValue = Math.max(...data.map(d => d.value));
+      const valueRange = maxValue - minValue;
+      
+      const xStep = (width - 2 * padding) / (data.length - 1);
+      const yScale = (height - 2 * padding) / valueRange;
+      
+      let path = `M ${padding} ${height - padding - ((data[0].value - minValue) * yScale)}`;
+      
+      for (let i = 1; i < data.length; i++) {
+        const x = padding + i * xStep;
+        const y = height - padding - ((data[i].value - minValue) * yScale);
+        path += ` L ${x} ${y}`;
+      }
+      
+      return path;
+    };
+
+    return (
+      <div className="min-h-screen bg-white">
+        <Header setCurrentPage={setCurrentPage} />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          {/* Portfolio Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">My Art Portfolio</h1>
+            <p className="text-gray-600">Track your collection's performance and get AI-powered insights</p>
+          </div>
+
+          {/* Total Value Section with Chart */}
+          <div className="bg-white rounded-xl shadow-lg p-6 mb-8 border border-gray-200">
+            <div className="mb-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Total Value</h2>
+              
+              <div className="flex items-baseline space-x-8">
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">Total Value</p>
+                  <p className="text-3xl font-bold text-gray-900">
+                    {formatCurrency(portfolioData.totalValue)}
+                  </p>
+                </div>
+                
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">Day Change</p>
+                  <p className={`text-xl font-semibold ${portfolioData.dayChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    {portfolioData.dayChange >= 0 ? '+' : ''}{formatCurrency(portfolioData.dayChange)} ({portfolioData.dayChange >= 0 ? '+' : ''}{portfolioData.dayChangePercent}%)
+                  </p>
+                </div>
+                
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">1-Year Change</p>
+                  <p className={`text-xl font-semibold ${portfolioData.yearChange >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                    {portfolioData.yearChange >= 0 ? '+' : ''}{formatCurrency(portfolioData.yearChange)} ({portfolioData.yearChange >= 0 ? '+' : ''}{portfolioData.yearChangePercent}%)
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Chart Controls */}
+            <div className="flex items-center justify-between mb-4">
+              <button
+                onClick={() => setShowTableView(!showTableView)}
+                className="flex items-center space-x-2 text-blue-600 hover:text-blue-700"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <span className="text-sm font-medium">Table View</span>
+              </button>
+              
+              <div className="flex space-x-2">
+                {['1M', '3M', '6M', 'YTD', '1Y', '2Y'].map((period) => (
+                  <button
+                    key={period}
+                    onClick={() => setSelectedTimeframe(period)}
+                    className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
+                      selectedTimeframe === period
+                        ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                    }`}
+                  >
+                    {period === 'YTD' ? 'YTD' : period === '1Y' ? '1 Yr' : period === '2Y' ? '2 Yr' : period + 'o'}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Chart */}
+            <div className="relative h-80 bg-gray-50 rounded-lg p-4">
+              <svg viewBox="0 0 1200 300" className="w-full h-full" preserveAspectRatio="none">
+                {/* Grid lines */}
+                <defs>
+                  <pattern id="grid" width="100" height="50" patternUnits="userSpaceOnUse">
+                    <rect width="100" height="50" fill="none" stroke="#e5e7eb" strokeWidth="0.5" />
+                  </pattern>
+                </defs>
+                <rect width="1200" height="300" fill="url(#grid)" />
+                
+                {/* Chart line */}
+                <path
+                  d={createChartPath(portfolioData.chartData[selectedTimeframe])}
+                  fill="none"
+                  stroke="#2563eb"
+                  strokeWidth="3"
+                />
+                
+                {/* Area under line */}
+                <path
+                  d={createChartPath(portfolioData.chartData[selectedTimeframe]) + ` L 1180 280 L 20 280 Z`}
+                  fill="url(#gradient)"
+                  opacity="0.1"
+                />
+                
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#2563eb" stopOpacity="0.5" />
+                    <stop offset="100%" stopColor="#2563eb" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              
+              {/* X-axis labels */}
+              <div className="absolute bottom-0 left-0 right-0 flex justify-between px-4 text-xs text-gray-500">
+                {portfolioData.chartData[selectedTimeframe].filter((_, i) => 
+                  i === 0 || 
+                  i === Math.floor(portfolioData.chartData[selectedTimeframe].length / 2) || 
+                  i === portfolioData.chartData[selectedTimeframe].length - 1
+                ).map((point, index) => (
+                  <span key={index}>{point.date}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Portfolio Summary Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            {/* Total Value Card */}
+            <div className="bg-gradient-to-r from-red-50 to-blue-50 rounded-xl p-6 border border-gray-200">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm font-medium text-gray-600">Portfolio Growth</h3>
+                <DollarSign className="w-5 h-5 text-gray-400" />
+              </div>
+              <p className="text-3xl font-bold text-gray-900 mb-2">
+                {portfolioData.changePercent}%
+              </p>
+              <div className="flex items-center space-x-2">
+                <TrendingUp className="w-4 h-4 text-green-500" />
+                <span className="text-sm font-medium text-green-600">
+                  +{formatCurrency(portfolioData.totalChange)} YTD
+                </span>
+              </div>
+            </div>
+
+            {/* Risk Score Card */}
+            <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm font-medium text-gray-600">Portfolio Risk Score</h3>
+                <Shield className="w-5 h-5 text-gray-400" />
+              </div>
+              <div className="space-y-3">
+                <div>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span>Volatility</span>
+                    <span>{portfolioData.riskMetrics.volatilityScore}/10</span>
+                  </div>
+                  <div className="bg-gray-200 rounded-full h-2">
+                    <div 
+                      className="bg-yellow-500 h-2 rounded-full"
+                      style={{ width: `${portfolioData.riskMetrics.volatilityScore * 10}%` }}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div className="flex justify-between text-xs mb-1">
+                    <span>Liquidity</span>
+                    <span>{portfolioData.riskMetrics.liquidityScore}/10</span>
+                  </div>
+                  <div className="bg-gray-200 rounded-full h-2">
+                    <div 
+                      className="bg-blue-500 h-2 rounded-full"
+                      style={{ width: `${portfolioData.riskMetrics.liquidityScore * 10}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Diversification Card */}
+            <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-sm font-medium text-gray-600">Diversification</h3>
+                <PieChart className="w-5 h-5 text-gray-400" />
+              </div>
+              <div className="space-y-2">
+                {portfolioData.diversification.map((category, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <span className="text-sm text-gray-700">{category.category}</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-24 bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="h-2 rounded-full"
+                          style={{ 
+                            width: `${category.value}%`,
+                            background: index === 0 ? '#dc2626' : index === 1 ? '#2563eb' : '#7c3aed'
+                          }}
+                        />
+                      </div>
+                      <span className="text-sm font-medium w-12 text-right">{category.value}%</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Portfolio Holdings */}
+          <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-semibold text-gray-900">Your Collection</h3>
+              <div className="flex space-x-2">
+                <button
+                  onClick={() => setPortfolioView('grid')}
+                  className={`p-2 rounded-lg ${
+                    portfolioView === 'grid' ? 'bg-gray-200' : 'hover:bg-gray-100'
+                  }`}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setPortfolioView('list')}
+                  className={`p-2 rounded-lg ${
+                    portfolioView === 'list' ? 'bg-gray-200' : 'hover:bg-gray-100'
+                  }`}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => setPortfolioView('positions')}
+                  className={`px-3 py-2 rounded-lg flex items-center space-x-2 ${
+                    portfolioView === 'positions' ? 'bg-gray-200' : 'hover:bg-gray-100'
+                  }`}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span className="text-sm font-medium">Positions</span>
+                </button>
+              </div>
+            </div>
+
+            {portfolioView === 'grid' ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {portfolioData.artworks.map((artwork) => (
+                  <div key={artwork.id} className="border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg transition-shadow">
+                    <img
+                      src={artwork.imageUrl}
+                      alt={artwork.title}
+                      className="w-full h-48 object-cover"
+                      onError={(e) => {
+                        e.target.src = 'https://via.placeholder.com/400x300?text=' + artwork.artist.split(' ').map(n => n[0]).join('');
+                      }}
+                    />
+                    <div className="p-4">
+                      <h4 className="font-semibold text-gray-900">{artwork.title}</h4>
+                      <p className="text-sm text-gray-600 mb-3">{artwork.artist}, {artwork.year}</p>
+                      
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-500">Current Value</span>
+                          <span className="font-semibold">{formatCurrency(artwork.currentValue)}</span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-500">Change</span>
+                          <span className={`text-sm font-medium ${artwork.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                            {artwork.change >= 0 ? '+' : ''}{formatCurrency(artwork.change)} ({artwork.changePercent}%)
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm text-gray-500">AI Recommendation</span>
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(artwork.status)}`}>
+                            {artwork.status}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="border-b border-gray-200">
+                    <tr>
+                      <th className="text-left py-3 px-4 text-sm font-medium text-gray-700">Artwork</th>
+                      <th className="text-right py-3 px-4 text-sm font-medium text-gray-700">Purchase Price</th>
+                      <th className="text-right py-3 px-4 text-sm font-medium text-gray-700">Current Value</th>
+                      <th className="text-right py-3 px-4 text-sm font-medium text-gray-700">Change</th>
+                      <th className="text-center py-3 px-4 text-sm font-medium text-gray-700">Risk</th>
+                      <th className="text-center py-3 px-4 text-sm font-medium text-gray-700">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {portfolioData.artworks.map((artwork) => (
+                      <tr key={artwork.id} className="border-b border-gray-100 hover:bg-gray-50">
+                        <td className="py-4 px-4">
+                          <div className="flex items-center space-x-3">
+                            <img
+                              src={artwork.imageUrl}
+                              alt={artwork.title}
+                              className="w-12 h-12 rounded-lg object-cover"
+                              onError={(e) => {
+                                e.target.src = 'https://via.placeholder.com/48x48?text=' + artwork.artist.split(' ').map(n => n[0]).join('');
+                              }}
+                            />
+                            <div>
+                              <p className="font-medium text-gray-900">{artwork.title}</p>
+                              <p className="text-sm text-gray-600">{artwork.artist}, {artwork.year}</p>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="text-right py-4 px-4 text-gray-700">
+                          {formatCurrency(artwork.purchasePrice)}
+                        </td>
+                        <td className="text-right py-4 px-4 font-semibold text-gray-900">
+                          {formatCurrency(artwork.currentValue)}
+                        </td>
+                        <td className="text-right py-4 px-4">
+                          <span className={`font-medium ${artwork.change >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                            {artwork.change >= 0 ? '+' : ''}{formatCurrency(artwork.change)}
+                            <br />
+                            <span className="text-xs">({artwork.changePercent}%)</span>
+                          </span>
+                        </td>
+                        <td className="text-center py-4 px-4">
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getRiskColor(artwork.riskLevel)}`}>
+                            {artwork.riskLevel}
+                          </span>
+                        </td>
+                        <td className="text-center py-4 px-4">
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(artwork.status)}`}>
+                            {artwork.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {portfolioView === 'positions' && (
+              <div className="space-y-6">
+                {/* Contemporary Art Section */}
+                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                  <div 
+                    className="bg-gray-50 px-4 py-3 flex items-center justify-between cursor-pointer hover:bg-gray-100"
+                    onClick={() => setExpandedSections({...expandedSections, contemporary: !expandedSections.contemporary})}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <svg className={`w-4 h-4 transition-transform ${expandedSections.contemporary ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      <h4 className="font-semibold text-gray-900">Contemporary Art</h4>
+                    </div>
+                    <div className="flex items-center space-x-6 text-sm">
+                      <span className="text-gray-600">Total Value: <span className="font-semibold text-gray-900">{formatCurrency(162500000)}</span></span>
+                      <span className="text-green-600 font-medium">+30.0%</span>
+                    </div>
+                  </div>
+                  
+                  {expandedSections.contemporary && (
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead className="bg-gray-50 border-y border-gray-200">
+                          <tr>
+                            <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Artist / Work</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Acquired</th>
+                            <th className="text-right py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Purchase Price</th>
+                            <th className="text-right py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Current Value</th>
+                            <th className="text-right py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Gain/Loss</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Annual Return</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Risk</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">AI Rec</th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                          <tr className="hover:bg-gray-50">
+                            <td className="py-4 px-4">
+                              <div className="flex items-center space-x-3">
+                                <img 
+                                  src="/images/artworks/Basquiat.jpeg" 
+                                  alt="Basquiat artwork"
+                                  className="w-10 h-10 rounded object-cover"
+                                  onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.nextSibling.style.display = 'flex';
+                                  }}
+                                />
+                                <div className="w-10 h-10 rounded bg-gray-200 hidden items-center justify-center text-xs font-bold text-gray-600">JMB</div>
+                                <div>
+                                  <p className="text-sm font-medium text-gray-900">Jean-Michel Basquiat</p>
+                                  <p className="text-xs text-gray-500">Untitled, 1982</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="text-center py-4 px-4 text-sm text-gray-600">Mar 2021</td>
+                            <td className="text-right py-4 px-4 text-sm text-gray-900">{formatCurrency(85000000)}</td>
+                            <td className="text-right py-4 px-4 text-sm font-semibold text-gray-900">{formatCurrency(110500000)}</td>
+                            <td className="text-right py-4 px-4">
+                              <div className="text-sm">
+                                <p className="font-medium text-green-600">+{formatCurrency(25500000)}</p>
+                                <p className="text-xs text-green-600">+30.0%</p>
+                              </div>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="text-sm font-medium text-green-600">+12.3%</span>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">Low</span>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">Hold</span>
+                            </td>
+                          </tr>
+                          <tr className="hover:bg-gray-50">
+                            <td className="py-4 px-4">
+                              <div className="flex items-center space-x-3">
+                                <img 
+                                  src="/images/artworks/Mondrian.jpeg" 
+                                  alt="Mondrian artwork"
+                                  className="w-10 h-10 rounded object-cover"
+                                  onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.nextSibling.style.display = 'flex';
+                                  }}
+                                />
+                                <div className="w-10 h-10 rounded bg-gray-200 hidden items-center justify-center text-xs font-bold text-gray-600">PM</div>
+                                <div>
+                                  <p className="text-sm font-medium text-gray-900">Piet Mondrian</p>
+                                  <p className="text-xs text-gray-500">Broadway Boogie-Woogie, 1943</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="text-center py-4 px-4 text-sm text-gray-600">Jan 2022</td>
+                            <td className="text-right py-4 px-4 text-sm text-gray-900">{formatCurrency(38000000)}</td>
+                            <td className="text-right py-4 px-4 text-sm font-semibold text-gray-900">{formatCurrency(52000000)}</td>
+                            <td className="text-right py-4 px-4">
+                              <div className="text-sm">
+                                <p className="font-medium text-green-600">+{formatCurrency(14000000)}</p>
+                                <p className="text-xs text-green-600">+36.8%</p>
+                              </div>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="text-sm font-medium text-green-600">+18.4%</span>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-700">Medium</span>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">Buy</span>
+                            </td>
+                          </tr>
+                        </tbody>
+                        <tfoot className="bg-gray-50 border-t border-gray-200">
+                          <tr>
+                            <td colSpan="3" className="py-3 px-4 text-sm font-medium text-gray-900">Contemporary Total</td>
+                            <td className="text-right py-3 px-4 text-sm font-bold text-gray-900">{formatCurrency(162500000)}</td>
+                            <td className="text-right py-3 px-4">
+                              <div className="text-sm">
+                                <p className="font-bold text-green-600">+{formatCurrency(39500000)}</p>
+                                <p className="text-xs font-medium text-green-600">+32.1%</p>
+                              </div>
+                            </td>
+                            <td colSpan="3"></td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                  )}
+                </div>
+
+                {/* Surrealist Art Section */}
+                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                  <div 
+                    className="bg-gray-50 px-4 py-3 flex items-center justify-between cursor-pointer hover:bg-gray-100"
+                    onClick={() => setExpandedSections({...expandedSections, surrealist: !expandedSections.surrealist})}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <svg className={`w-4 h-4 transition-transform ${expandedSections.surrealist ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      <h4 className="font-semibold text-gray-900">Surrealist Masters</h4>
+                    </div>
+                    <div className="flex items-center space-x-6 text-sm">
+                      <span className="text-gray-600">Total Value: <span className="font-semibold text-gray-900">{formatCurrency(121000000)}</span></span>
+                      <span className="text-green-600 font-medium">+27.4%</span>
+                    </div>
+                  </div>
+                  
+                  {expandedSections.surrealist && (
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead className="bg-gray-50 border-y border-gray-200">
+                          <tr>
+                            <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Artist / Work</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Acquired</th>
+                            <th className="text-right py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Purchase Price</th>
+                            <th className="text-right py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Current Value</th>
+                            <th className="text-right py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Gain/Loss</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Annual Return</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Risk</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">AI Rec</th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                          <tr className="hover:bg-gray-50">
+                            <td className="py-4 px-4">
+                              <div className="flex items-center space-x-3">
+                                <img 
+                                  src="/images/artworks/Magritte.png" 
+                                  alt="Magritte artwork"
+                                  className="w-10 h-10 rounded object-cover"
+                                  onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.nextSibling.style.display = 'flex';
+                                  }}
+                                />
+                                <div className="w-10 h-10 rounded bg-gray-200 hidden items-center justify-center text-xs font-bold text-gray-600">RM</div>
+                                <div>
+                                  <p className="text-sm font-medium text-gray-900">René Magritte</p>
+                                  <p className="text-xs text-gray-500">The Empire of Light, 1954</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="text-center py-4 px-4 text-sm text-gray-600">Nov 2020</td>
+                            <td className="text-right py-4 px-4 text-sm text-gray-900">{formatCurrency(95000000)}</td>
+                            <td className="text-right py-4 px-4 text-sm font-semibold text-gray-900">{formatCurrency(121000000)}</td>
+                            <td className="text-right py-4 px-4">
+                              <div className="text-sm">
+                                <p className="font-medium text-green-600">+{formatCurrency(26000000)}</p>
+                                <p className="text-xs text-green-600">+27.4%</p>
+                              </div>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="text-sm font-medium text-green-600">+11.2%</span>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">Low</span>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">Hold</span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+
+                {/* Modern Masters Section */}
+                <div className="border border-gray-200 rounded-lg overflow-hidden">
+                  <div 
+                    className="bg-gray-50 px-4 py-3 flex items-center justify-between cursor-pointer hover:bg-gray-100"
+                    onClick={() => setExpandedSections({...expandedSections, modern: !expandedSections.modern})}
+                  >
+                    <div className="flex items-center space-x-2">
+                      <svg className={`w-4 h-4 transition-transform ${expandedSections.modern ? 'rotate-90' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                      <h4 className="font-semibold text-gray-900">Modern Masters</h4>
+                    </div>
+                    <div className="flex items-center space-x-6 text-sm">
+                      <span className="text-gray-600">Total Value: <span className="font-semibold text-gray-900">{formatCurrency(14500000)}</span></span>
+                      <span className="text-green-600 font-medium">+20.8%</span>
+                    </div>
+                  </div>
+                  
+                  {expandedSections.modern && (
+                    <div className="overflow-x-auto">
+                      <table className="w-full">
+                        <thead className="bg-gray-50 border-y border-gray-200">
+                          <tr>
+                            <th className="text-left py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Artist / Work</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Acquired</th>
+                            <th className="text-right py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Purchase Price</th>
+                            <th className="text-right py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Current Value</th>
+                            <th className="text-right py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Gain/Loss</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Annual Return</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">Risk</th>
+                            <th className="text-center py-3 px-4 text-xs font-medium text-gray-500 uppercase tracking-wider">AI Rec</th>
+                          </tr>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-200">
+                          <tr className="hover:bg-gray-50">
+                            <td className="py-4 px-4">
+                              <div className="flex items-center space-x-3">
+                                <img 
+                                  src="/images/artworks/Picasso.webp" 
+                                  alt="Picasso artwork"
+                                  className="w-10 h-10 rounded object-cover"
+                                  onError={(e) => {
+                                    e.target.style.display = 'none';
+                                    e.target.nextSibling.style.display = 'flex';
+                                  }}
+                                />
+                                <div className="w-10 h-10 rounded bg-gray-200 hidden items-center justify-center text-xs font-bold text-gray-600">PP</div>
+                                <div>
+                                  <p className="text-sm font-medium text-gray-900">Pablo Picasso</p>
+                                  <p className="text-xs text-gray-500">La Femme, 1953</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td className="text-center py-4 px-4 text-sm text-gray-600">Jun 2023</td>
+                            <td className="text-right py-4 px-4 text-sm text-gray-900">{formatCurrency(12000000)}</td>
+                            <td className="text-right py-4 px-4 text-sm font-semibold text-gray-900">{formatCurrency(14500000)}</td>
+                            <td className="text-right py-4 px-4">
+                              <div className="text-sm">
+                                <p className="font-medium text-green-600">+{formatCurrency(2500000)}</p>
+                                <p className="text-xs text-green-600">+20.8%</p>
+                              </div>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="text-sm font-medium text-green-600">+10.4%</span>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-700">Low</span>
+                            </td>
+                            <td className="text-center py-4 px-4">
+                              <span className="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700">Hold</span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+
+                {/* Portfolio Summary */}
+                <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase tracking-wider">Total Portfolio Value</p>
+                      <p className="text-2xl font-bold text-gray-900">{formatCurrency(298000000)}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase tracking-wider">Total Gain/Loss</p>
+                      <p className="text-2xl font-bold text-green-600">+{formatCurrency(68000000)}</p>
+                      <p className="text-sm text-green-600">+29.6%</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase tracking-wider">Avg Annual Return</p>
+                      <p className="text-2xl font-bold text-green-600">+14.2%</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500 uppercase tracking-wider">Portfolio Health</p>
+                      <div className="flex items-center space-x-2 mt-1">
+                        <div className="flex space-x-1">
+                          <div className="w-2 h-6 bg-green-500 rounded-sm"></div>
+                          <div className="w-2 h-6 bg-green-500 rounded-sm"></div>
+                          <div className="w-2 h-6 bg-green-500 rounded-sm"></div>
+                          <div className="w-2 h-6 bg-green-500 rounded-sm"></div>
+                          <div className="w-2 h-6 bg-gray-300 rounded-sm"></div>
+                        </div>
+                        <span className="text-sm font-medium text-gray-700">Excellent</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* AI Insights */}
+          <div className="mt-8 bg-gradient-to-r from-red-50 to-blue-50 rounded-xl p-6 border border-red-200">
+            <div className="flex items-start space-x-3">
+              <AlertTriangle className="w-5 h-5 text-red-600 mt-0.5" />
+              <div>
+                <h3 className="font-semibold text-gray-900 mb-2">AI Portfolio Insights</h3>
+                <ul className="space-y-2 text-sm text-gray-700">
+                  <li>• Your portfolio has appreciated 29.6% over the past year, outperforming the art market index by 21.1%</li>
+                  <li>• Mondrian's Broadway Boogie-Woogie shows exceptional growth (+36.8%) - geometric abstraction gaining momentum</li>
+                  <li>• Picasso's La Femme represents strong value with steady appreciation in the Blue Chip market</li>
+                  <li>• Consider diversifying with more Abstract Expressionist works to balance the portfolio</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+
+  // Main render logic
+if (currentPage === 'landing') {
   return <LandingPage />;
+} else if (currentPage === 'vasari-v01') {
+  return <VasariV01Page />;
+} else if (currentPage === 'try-vasari') {
+  return <TryVasariPage />;
+} else if (currentPage === 'evaluation') {
+  return <EvaluationPage />;
+} else if (currentPage === 'portfolio') {
+  return <MyPortfolioPage />;
+}
+
+// Default to landing page
+return <LandingPage />;
 };
 
-export default VasariPlatform;
+export default VasariPlatform;  
