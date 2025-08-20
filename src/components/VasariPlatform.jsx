@@ -1,6 +1,107 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, TrendingUp, Shield, AlertTriangle, DollarSign, Eye, Calendar, MapPin, User, FileText, BarChart3, PieChart, Activity, Upload, Camera, X, ArrowLeftRight, Mail } from 'lucide-react';
 
+// Updated Header Component with active buttons
+const Header = React.memo(({ setCurrentPage }) => (
+  <header className="px-6 py-6 bg-white border-b border-gray-200 relative z-20">
+    <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="flex items-center space-x-3">
+        <div className="w-10 h-10 border-2 rounded-lg relative" style={{ borderColor: '#000000', background: 'transparent' }}>
+          {/* Inner diamond in black and white */}
+          <div 
+            className="absolute inset-0"
+            style={{
+              transform: 'rotate(45deg) scale(0.7)',
+              top: '50%',
+              left: '50%',
+              transformOrigin: 'center',
+              marginTop: '-50%',
+              marginLeft: '-50%',
+              width: '100%',
+              height: '100%',
+              background: '#000000',
+              border: '1px solid #000000'
+            }}
+          >
+            {/* Mini square inside diamond in white */}
+            <div 
+              className="absolute inset-0 border-2 border-white"
+              style={{
+                transform: 'rotate(45deg) scale(0.85)',
+                top: '50%',
+                left: '50%',
+                transformOrigin: 'center',
+                marginTop: '-50%',
+                marginLeft: '-50%',
+                width: '100%',
+                height: '100%'
+              }}
+            ></div>
+          </div>
+
+          {/* Plus symbol in white */}
+          <div className="absolute inset-0 z-10 flex items-center justify-center">
+            {/* Horizontal line of plus */}
+            <div 
+              className="absolute bg-white"
+              style={{
+                width: '100%',
+                height: '2px',
+                top: '50%',
+                left: '0',
+                transform: 'translateY(-50%)'
+              }}
+            ></div>
+            {/* Vertical line of plus */}
+            <div 
+              className="absolute bg-white"
+              style={{
+                width: '2px',
+                height: '100%',
+                top: '0',
+                left: '50%',
+                transform: 'translateX(-50%)'
+              }}
+            ></div>
+          </div>
+        </div>
+        <span 
+          className="text-xl font-semibold text-black cursor-pointer" 
+          style={{ fontFamily: 'JetBrains Mono, monospace' }}
+          onClick={() => setCurrentPage('landing')}
+        >
+          Vasari
+        </span>
+      </div>
+      <div className="flex items-center space-x-3">
+        <button
+          onClick={() => setCurrentPage('try-vasari')}
+          className="px-4 bg-white text-black text-xs font-bold rounded-lg shadow-lg border border-black flex items-center hover:bg-gray-100 transition-colors"
+          style={{ fontFamily: 'JetBrains Mono, monospace', height: '53px' }}
+        >
+          <span>TRY VASARI</span>
+        </button>
+        <button
+          onClick={() => setCurrentPage('evaluation')}
+          className="px-4 py-2 bg-black text-white text-xs font-bold rounded-lg shadow-lg border border-black flex items-center hover:bg-gray-800 transition-colors"
+          style={{ fontFamily: 'JetBrains Mono, monospace', height: '53px' }}
+        >
+          <Eye className="w-3 h-3 mr-1" />
+          <span>EVALUATE ARTWORK</span>
+        </button>
+        <button
+          onClick={() => setCurrentPage('portfolio')}
+          className="px-4 py-2 bg-black text-white text-xs font-bold rounded-lg shadow-lg border border-black flex items-center hover:bg-gray-800 transition-colors"
+          style={{ fontFamily: 'JetBrains Mono, monospace', height: '53px' }}
+        >
+          <BarChart3 className="w-3 h-3 mr-1" />
+          <span>MY PORTFOLIO</span>
+        </button>
+      </div>
+    </div>
+  </header>
+));
+
 const EvaluationPage = ({ 
   searchQuery,
   setSearchQuery,
@@ -575,106 +676,7 @@ const EvaluationPage = ({
     </div>
   );
 
-// Updated Header Component with active buttons
-const Header = ({ setCurrentPage }) => (
-  <header className="px-6 py-6 bg-white border-b border-gray-200 relative z-20">
-    <div className="max-w-7xl mx-auto flex justify-between items-center">
-      <div className="flex items-center space-x-3">
-        <div className="w-10 h-10 border-2 rounded-lg relative" style={{ borderColor: '#000000', background: 'transparent' }}>
-          {/* Inner diamond in black and white */}
-          <div 
-            className="absolute inset-0"
-            style={{
-              transform: 'rotate(45deg) scale(0.7)',
-              top: '50%',
-              left: '50%',
-              transformOrigin: 'center',
-              marginTop: '-50%',
-              marginLeft: '-50%',
-              width: '100%',
-              height: '100%',
-              background: '#000000',
-              border: '1px solid #000000'
-            }}
-          >
-            {/* Mini square inside diamond in white */}
-            <div 
-              className="absolute inset-0 border-2 border-white"
-              style={{
-                transform: 'rotate(45deg) scale(0.85)',
-                top: '50%',
-                left: '50%',
-                transformOrigin: 'center',
-                marginTop: '-50%',
-                marginLeft: '-50%',
-                width: '100%',
-                height: '100%'
-              }}
-            ></div>
-          </div>
 
-          {/* Plus symbol in white */}
-          <div className="absolute inset-0 z-10 flex items-center justify-center">
-            {/* Horizontal line of plus */}
-            <div 
-              className="absolute bg-white"
-              style={{
-                width: '100%',
-                height: '2px',
-                top: '50%',
-                left: '0',
-                transform: 'translateY(-50%)'
-              }}
-            ></div>
-            {/* Vertical line of plus */}
-            <div 
-              className="absolute bg-white"
-              style={{
-                width: '2px',
-                height: '100%',
-                top: '0',
-                left: '50%',
-                transform: 'translateX(-50%)'
-              }}
-            ></div>
-          </div>
-        </div>
-        <span 
-          className="text-xl font-semibold text-black cursor-pointer" 
-          style={{ fontFamily: 'JetBrains Mono, monospace' }}
-          onClick={() => setCurrentPage('landing')}
-        >
-          Vasari
-        </span>
-      </div>
-      <div className="flex items-center space-x-3">
-        <button
-          onClick={() => setCurrentPage('try-vasari')}
-          className="px-4 bg-white text-black text-xs font-bold rounded-lg shadow-lg border border-black flex items-center hover:bg-gray-100 transition-colors"
-          style={{ fontFamily: 'JetBrains Mono, monospace', height: '53px' }}
-        >
-          <span>TRY VASARI</span>
-        </button>
-        <button
-          onClick={() => setCurrentPage('evaluation')}
-          className="px-4 py-2 bg-black text-white text-xs font-bold rounded-lg shadow-lg border border-black flex items-center hover:bg-gray-800 transition-colors"
-          style={{ fontFamily: 'JetBrains Mono, monospace', height: '53px' }}
-        >
-          <Eye className="w-3 h-3 mr-1" />
-          <span>EVALUATE ARTWORK</span>
-        </button>
-        <button
-          onClick={() => setCurrentPage('portfolio')}
-          className="px-4 py-2 bg-black text-white text-xs font-bold rounded-lg shadow-lg border border-black flex items-center hover:bg-gray-800 transition-colors"
-          style={{ fontFamily: 'JetBrains Mono, monospace', height: '53px' }}
-        >
-          <BarChart3 className="w-3 h-3 mr-1" />
-          <span>MY PORTFOLIO</span>
-        </button>
-      </div>
-    </div>
-  </header>
-);
 
 // Intersection Observer Hook
   const useIntersectionObserver = (threshold = 0.3) => {
