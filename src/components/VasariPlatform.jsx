@@ -2933,35 +2933,51 @@ const VasariPlatform = () => {
   return <TryVasariPage setCurrentPage={setCurrentPage} />;
 } else if (currentPage === 'evaluation') {
   return (
-    <EvaluationPage
-      searchQuery={searchQuery}
-      setSearchQuery={setSearchQuery}
-      selectedArtwork={selectedArtwork}
-      setSelectedArtwork={setSelectedArtwork}
-      evaluationData={evaluationData}
-      setEvaluationData={setEvaluationData}
-      loading={loading}
-      setLoading={setLoading}
-      uploadedImage={uploadedImage}
-      setUploadedImage={setUploadedImage}
-      uploadMode={uploadMode}
-      setUploadMode={setUploadMode}
-      dragOver={dragOver}
-      setDragOver={setDragOver}
-      handleSearch={handleSearch}
-      handleImageUpload={handleImageUpload}
-      analyzeUploadedArtwork={analyzeUploadedArtwork}
-      handleDrop={handleDrop}
-      handleDragOver={handleDragOver}
-      handleDragLeave={handleDragLeave}
-      generateEvaluationData={generateEvaluationData}
-      formatCurrency={formatCurrency}
-      getRiskColor={getRiskColor}
-      getTrendIcon={getTrendIcon}
-      artDatabase={artDatabase}
-      setCurrentPage={setCurrentPage}
-    />
-  );
+  <div>
+    <div style={{ display: currentPage === 'landing' ? 'block' : 'none' }}>
+      <LandingPage setCurrentPage={setCurrentPage} />
+    </div>
+    <div style={{ display: currentPage === 'try-vasari' ? 'block' : 'none' }}>
+      <TryVasariPage setCurrentPage={setCurrentPage} />
+    </div>
+    <div style={{ display: currentPage === 'evaluation' ? 'block' : 'none' }}>
+      <EvaluationPage 
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        selectedArtwork={selectedArtwork}
+        setSelectedArtwork={setSelectedArtwork}
+        evaluationData={evaluationData}
+        setEvaluationData={setEvaluationData}
+        loading={loading}
+        setLoading={setLoading}
+        uploadedImage={uploadedImage}
+        setUploadedImage={setUploadedImage}
+        uploadMode={uploadMode}
+        setUploadMode={setUploadMode}
+        dragOver={dragOver}
+        setDragOver={setDragOver}
+        handleSearch={handleSearch}
+        handleImageUpload={handleImageUpload}
+        analyzeUploadedArtwork={analyzeUploadedArtwork}
+        handleDrop={handleDrop}
+        handleDragOver={handleDragOver}
+        handleDragLeave={handleDragLeave}
+        generateEvaluationData={generateEvaluationData}
+        formatCurrency={formatCurrency}
+        getRiskColor={getRiskColor}
+        getTrendIcon={getTrendIcon}
+        artDatabase={artDatabase}
+        setCurrentPage={setCurrentPage}
+      />
+    </div>
+    <div style={{ display: currentPage === 'portfolio' ? 'block' : 'none' }}>
+      <PortfolioPage 
+        setCurrentPage={setCurrentPage} 
+        formatCurrency={formatCurrency} 
+      />
+    </div>
+  </div>
+);
 } else if (currentPage === 'portfolio') {
   return <PortfolioPage setCurrentPage={setCurrentPage} formatCurrency={formatCurrency} />;
 }
