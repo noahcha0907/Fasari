@@ -102,6 +102,62 @@ const Header = React.memo(({ setCurrentPage }) => (
   </header>
 ));
 
+// Intersection Observer Hook
+  const useIntersectionObserver = (threshold = 0.3) => {
+    const [isVisible, setIsVisible] = useState(false);
+    const ref = useRef();
+
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        },
+        { threshold }
+      );
+
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+
+      return () => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      };
+    }, [threshold]);
+
+    return [ref, isVisible];
+  };
+
+const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
+  };
+
+  const getRiskColor = (risk) => {
+    switch (risk.toLowerCase()) {
+      case 'low': return 'text-green-600 bg-green-50';
+      case 'medium': return 'text-yellow-600 bg-yellow-50';
+      case 'high': return 'text-red-600 bg-red-50';
+      default: return 'text-gray-600 bg-gray-50';
+    }
+  };
+
+  const getTrendIcon = (trend) => {
+    switch (trend) {
+      case 'rising': return <TrendingUp className="w-4 h-4 text-green-500" />;
+      case 'falling': return <TrendingUp className="w-4 h-4 text-red-500 rotate-180" />;
+      default: return <Activity className="w-4 h-4 text-blue-500" />;
+    }
+  };
+
+
 const EvaluationPage = ({ 
   searchQuery,
   setSearchQuery,
@@ -677,61 +733,6 @@ const EvaluationPage = ({
   );
 
 
-
-// Intersection Observer Hook
-  const useIntersectionObserver = (threshold = 0.3) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef();
-
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        },
-        { threshold }
-      );
-
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
-
-      return () => {
-        if (ref.current) {
-          observer.unobserve(ref.current);
-        }
-      };
-    }, [threshold]);
-
-    return [ref, isVisible];
-  };
-
-const formatCurrency = (amount) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  };
-
-  const getRiskColor = (risk) => {
-    switch (risk.toLowerCase()) {
-      case 'low': return 'text-green-600 bg-green-50';
-      case 'medium': return 'text-yellow-600 bg-yellow-50';
-      case 'high': return 'text-red-600 bg-red-50';
-      default: return 'text-gray-600 bg-gray-50';
-    }
-  };
-
-  const getTrendIcon = (trend) => {
-    switch (trend) {
-      case 'rising': return <TrendingUp className="w-4 h-4 text-green-500" />;
-      case 'falling': return <TrendingUp className="w-4 h-4 text-red-500 rotate-180" />;
-      default: return <Activity className="w-4 h-4 text-blue-500" />;
-    }
-  };
 
 // Landing Page Component
   const LandingPage = ({ setCurrentPage }) => {
