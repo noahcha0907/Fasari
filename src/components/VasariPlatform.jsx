@@ -2921,17 +2921,6 @@ const VasariPlatform = () => {
 
   
 
-  
-
-
-
-
-
-  if (currentPage === 'landing') {
-  return <LandingPage setCurrentPage={setCurrentPage} />;
-} else if (currentPage === 'try-vasari') {
-  return <TryVasariPage setCurrentPage={setCurrentPage} />;
-} else if (currentPage === 'evaluation') {
   return (
   <div>
     <div style={{ display: currentPage === 'landing' ? 'block' : 'none' }}>
@@ -2978,9 +2967,8 @@ const VasariPlatform = () => {
     </div>
   </div>
 );
-} else if (currentPage === 'portfolio') {
-  return <PortfolioPage setCurrentPage={setCurrentPage} formatCurrency={formatCurrency} />;
-}
+
+
 
 // Default to landing page
 return <LandingPage setCurrentPage={setCurrentPage} />;
